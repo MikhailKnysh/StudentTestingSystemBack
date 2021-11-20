@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace StudentTestingSystemBack
+namespace STS.Api
 {
     public class Program
     {

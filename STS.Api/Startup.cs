@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-namespace StudentTestingSystemBack
+namespace STS.Api
 {
     public class Startup
     {
@@ -23,7 +23,7 @@ namespace StudentTestingSystemBack
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "StudentTestingSystemBack", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "STS.Api", Version = "v1" });
             });
         }
 
@@ -34,7 +34,7 @@ namespace StudentTestingSystemBack
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StudentTestingSystemBack v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "STS.Api v1"));
             }
 
             app.UseHttpsRedirection();
