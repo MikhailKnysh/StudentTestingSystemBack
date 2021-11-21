@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Common.Models;
+using Microsoft.AspNetCore.Mvc;
 using STS.DAL.Interfaces;
 using System.Threading.Tasks;
 
@@ -17,9 +18,9 @@ namespace STS.Api.Controllers
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create(string name)
+        public async Task<IActionResult> Create([FromBody] SubjectModel subjectModel)
         {
-            await _subjectService.CreateAsync(name);
+            await _subjectService.CreateAsync(subjectModel);
             return Ok();
         }
     }

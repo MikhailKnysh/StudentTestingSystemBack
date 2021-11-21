@@ -1,18 +1,25 @@
-﻿using System;
+﻿using STS.DAL.EntityContext.Context;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace STS.DAL.DataAccess
 {
-    public abstract class BaseRepositoryAbstract<T> : IBaseRepository<T>
+    public abstract class BaseRepositoryAbstract<T> : IBaseRepository<T> where T : class
     {
-        public Task Create(T entity)
+        private SubjectContext _subjectContext;
+
+        public async Task<int> CreateAsync(T entity)
         {
-            throw new NotImplementedException();
+            await _subjectContext.Set<T>().AddAsync(entity);
+
+            var result = await _subjectContext.SaveChangesAsync();
+
+            return result;
         }
 
-        public Task Delete(T entity)
+        public Task<int> DeleteAsync(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -22,17 +29,17 @@ namespace STS.DAL.DataAccess
             throw new NotImplementedException();
         }
 
-        public Task<T> GetById(Guid id)
+        public Task<T> GetByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task Update(T entity)
+        public Task<int> UpdateAsync(T entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IQueryable> Where(Expression<Func<T, bool>> expression)
+        public Task<IQueryable<T>> WhereAsync(Expression<Func<T, bool>> expression)
         {
             throw new NotImplementedException();
         }

@@ -7,11 +7,11 @@ namespace STS.DAL.DataAccess
 {
     public interface IBaseRepository<T>
     {
-        Task Create(T entity);
-        Task<T> GetById(Guid id);
-        Task Update(T entity);
-        Task Delete(T entity);
+        Task<int> CreateAsync(T entity);
+        Task<T> GetByIdAsync(Guid id);
+        Task<int> UpdateAsync(T entity);
+        Task<int> DeleteAsync(Guid id);
         Task<T> FindAsync(Expression<Func<T, bool>> expression);
-        Task<IQueryable> Where(Expression<Func<T, bool>> expression);
+        Task<IQueryable<T>> WhereAsync(Expression<Func<T, bool>> expression);
     }
 }
