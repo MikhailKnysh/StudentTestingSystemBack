@@ -7,7 +7,7 @@ namespace STS.DAL.DataAccess.Subjects.Repositories
     public class SubjectRepository : BaseRepositoryAbstract<SubjectEntity>, ISubjectRepository<SubjectEntity>
     {
         public SubjectRepository(
-            AppContext context
+            ApplicationContext context
         ) : base(context)
         {
         }

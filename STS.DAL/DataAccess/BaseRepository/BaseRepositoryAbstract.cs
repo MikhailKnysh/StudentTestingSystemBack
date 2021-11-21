@@ -3,16 +3,15 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using AppContext = STS.DAL.EntityContext.Context.AppContext;
 
 namespace STS.DAL.DataAccess.BaseRepository
 {
     public abstract class BaseRepositoryAbstract<T> : IBaseRepository<T> where T : class
     {
-        private AppContext _context;
+        private ApplicationContext _context;
 
         public BaseRepositoryAbstract(
-            AppContext context
+            ApplicationContext context
         )
         {
             _context = context;
