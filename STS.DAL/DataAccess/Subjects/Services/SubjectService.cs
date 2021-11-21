@@ -4,24 +4,40 @@ using STS.DAL.DataAccess.Subjects.Repositories;
 using STS.DAL.EntityContext.Entitieas;
 using STS.DAL.Interfaces;
 using System.Threading.Tasks;
+using AutoMapper;
+using Common.Constans;
+using Common.FluentResult.Extensions;
 
-namespace STS.DAL.DataAccess.Subjects.Services.Subjects
+namespace STS.DAL.DataAccess.Subjects.Services
 {
     public class SubjectService : ISubjectService
     {
-        public ISubjectRepository<SubjectEntity> _subjectRepository; 
+        private readonly ISubjectRepository<SubjectEntity> _subjectRepository;
+        private readonly IMapper _mapper;
 
-        public SubjectService(ISubjectRepository<SubjectEntity> subjectRepository)
+        public SubjectService(
+            ISubjectRepository<SubjectEntity> subjectRepository,
+            IMapper mapper
+        )
         {
             _subjectRepository = subjectRepository;
+            _mapper = mapper;
         }
 
-        public Task<Result> CreateAsync(SubjectModel subjectModel)
+        public async Task<Result> CreateAsync(Subject subject)
         {
-            //mapping model to entity??
-            _subjectRepository.Create();
+            var subjectEntity = _mapper.Map<SubjectEntity>(subject);
+            var responseDb = await _subjectRepository.CreateAsync(subjectEntity);
 
-            return Result<Task>.Ok();
+            return responseDb.CheckDbResponse(ErrorConstants.SubjectErrors.SubjectNotCreated);
+        }
+
+        public async Task<Result<Subject>> FindByTitleAsync(string title)
+        {
+            var subjectEntity = await _subjectRepository.FindAsync(s => s.Title == title);
+            var subject = _mapper.Map<Subject>(subjectEntity);
+
+            return subject.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
         }
     }
 }

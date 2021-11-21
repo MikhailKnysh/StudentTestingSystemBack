@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using STS.DAL.DataAccess.Subjects.Extensions;
 using STS.DAL.EntityContext.Extensions;
+using STS.DAL.Mapper.Extensions;
 
 namespace STS.DAL.DataAccess.Extensions
 {
@@ -10,6 +11,8 @@ namespace STS.DAL.DataAccess.Extensions
         public static void AddDataAccess(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDatabaseContext(configuration);
+            services.AddAutoMapper();
+            
             services.AddSubject();
         }
     }

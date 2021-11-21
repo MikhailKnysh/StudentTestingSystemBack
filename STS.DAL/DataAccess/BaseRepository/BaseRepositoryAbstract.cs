@@ -3,18 +3,26 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using AppContext = STS.DAL.EntityContext.Context.AppContext;
 
-namespace STS.DAL.DataAccess
+namespace STS.DAL.DataAccess.BaseRepository
 {
     public abstract class BaseRepositoryAbstract<T> : IBaseRepository<T> where T : class
     {
-        private SubjectContext _subjectContext;
+        private AppContext _context;
+
+        public BaseRepositoryAbstract(
+            AppContext context
+        )
+        {
+            _context = context;
+        }
 
         public async Task<int> CreateAsync(T entity)
         {
-            await _subjectContext.Set<T>().AddAsync(entity);
+            await _context.Set<T>().AddAsync(entity);
 
-            var result = await _subjectContext.SaveChangesAsync();
+            var result = await _context.SaveChangesAsync();
 
             return result;
         }

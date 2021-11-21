@@ -9,7 +9,7 @@ namespace STS.DAL.EntityContext.Extensions
     {
         public static void AddDatabaseContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<SubjectContext>(options =>
+            services.AddDbContext<AppContext>(options =>
                 options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]));
         }
     }

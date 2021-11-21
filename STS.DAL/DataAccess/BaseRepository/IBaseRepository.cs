@@ -3,7 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace STS.DAL.DataAccess
+namespace STS.DAL.DataAccess.BaseRepository
 {
     public interface IBaseRepository<T>
     {

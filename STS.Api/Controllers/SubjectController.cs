@@ -2,26 +2,29 @@
 using Microsoft.AspNetCore.Mvc;
 using STS.DAL.Interfaces;
 using System.Threading.Tasks;
+using Common.RootControllers;
+using Microsoft.Extensions.Logging;
 
 namespace STS.Api.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class SubjectController : Controller
+    public class SubjectController : RootController
     {
         private readonly ISubjectService _subjectService;
 
-        public SubjectController(ISubjectService subjectService)
+        public SubjectController(
+            ISubjectService subjectService,
+            ILogger<RootController> logger
+        ) : base(logger)
         {
             _subjectService = subjectService;
         }
 
-        [HttpPost]
-        [Route("create")]
-        public async Task<IActionResult> Create([FromBody] SubjectModel subjectModel)
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromBody] Subject subject)
         {
-            await _subjectService.CreateAsync(subjectModel);
-            return Ok();
+            var result = await _subjectService.CreateAsync(subject);
+
+            return ToApiResult(result);
         }
     }
 }
