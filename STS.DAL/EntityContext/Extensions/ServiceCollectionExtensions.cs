@@ -9,8 +9,10 @@ namespace STS.DAL.EntityContext.Extensions
     {
         public static void AddDatabaseContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppContext>(options =>
-                options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]));
+            var connectionString = configuration.GetConnectionString("Default");
+            services.AddDbContext<ApplicationContext>(
+                builder => builder.UseSqlServer(connectionString, 
+                    builder => builder.MigrationsAssembly("STS.DAL")), ServiceLifetime.Transient);
         }
     }
 }
