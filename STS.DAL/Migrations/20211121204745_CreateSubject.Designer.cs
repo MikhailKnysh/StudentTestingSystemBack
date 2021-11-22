@@ -10,7 +10,7 @@ using STS.DAL.EntityContext.Context;
 namespace STS.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20211121203821_CreateSubject")]
+    [Migration("20211121204745_CreateSubject")]
     partial class CreateSubject
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

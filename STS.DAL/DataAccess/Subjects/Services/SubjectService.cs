@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Common.Constans;
 using Common.FluentResult.Extensions;
+using System;
 
 namespace STS.DAL.DataAccess.Subjects.Services
 {
@@ -27,6 +28,8 @@ namespace STS.DAL.DataAccess.Subjects.Services
         public async Task<Result> CreateAsync(Subject subject)
         {
             var subjectEntity = _mapper.Map<SubjectEntity>(subject);
+            subjectEntity.Id = new Guid();
+
             var responseDb = await _subjectRepository.CreateAsync(subjectEntity);
 
             return responseDb.CheckDbResponse(ErrorConstants.SubjectErrors.SubjectNotCreated);
