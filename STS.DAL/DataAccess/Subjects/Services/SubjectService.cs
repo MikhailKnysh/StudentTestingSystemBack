@@ -9,6 +9,7 @@ using Common.Constans;
 using Common.FluentResult.Extensions;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace STS.DAL.DataAccess.Subjects.Services
 {
@@ -44,10 +45,10 @@ namespace STS.DAL.DataAccess.Subjects.Services
             return subject.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
         }
 
-        public async Task<Result<IQueryable<Subject>>> GetAll()
+        public async Task<Result<List<Subject>>> GetAll()
         {
-            var foundedEntities = _subjectRepository.WhereAsync(c => c != null);
-            var subjects = _mapper.Map<IQueryable< Subject >> (foundedEntities);
+            var foundedEntities = await _subjectRepository.GetAll();
+            var subjects = _mapper.Map<List<Subject>>(foundedEntities);
 
             return subjects.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
         }

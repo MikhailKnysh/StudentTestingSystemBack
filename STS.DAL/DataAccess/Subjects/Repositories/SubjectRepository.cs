@@ -1,8 +1,9 @@
-﻿using FluentResults;
+﻿using Microsoft.EntityFrameworkCore;
 using STS.DAL.DataAccess.BaseRepository;
 using STS.DAL.EntityContext.Context;
 using STS.DAL.EntityContext.Entitieas;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,9 +24,11 @@ namespace STS.DAL.DataAccess.Subjects.Repositories
             return result;
         }
 
-        public Task<IQueryable<SubjectEntity>> GetAll()
+        public async Task<List<SubjectEntity>> GetAll()
         {
-            throw new NotImplementedException();
+            var result = await _context.Subjects.Select(x => x).ToListAsync();
+
+            return result;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using System.Collections.Generic;
 
 namespace Common.FluentResult.Extensions
 {
@@ -10,6 +11,12 @@ namespace Common.FluentResult.Extensions
         }
 
         public static Result<T> CheckEntityNull<T>(this T entity, string errorMessage)
+            where T : class
+        {
+            return entity is not null ? Result.Ok(entity) : Result.Fail(errorMessage);
+        }
+
+        public static Result<List<T>> CheckEntityCollectionNull<T>(this List<T> entity, string errorMessage)
             where T : class
         {
             return entity is not null ? Result.Ok(entity) : Result.Fail(errorMessage);

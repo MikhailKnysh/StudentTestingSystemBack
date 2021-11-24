@@ -36,6 +36,14 @@ namespace STS.Api.Controllers
             return ToApiResult(result);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var result = await _subjectService.GetAll();
+
+            return ToApiResult(result);
+        }
+
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] Subject subject)
         {
