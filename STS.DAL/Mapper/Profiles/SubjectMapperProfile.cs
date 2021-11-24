@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Common.Models;
 using STS.DAL.EntityContext.Entitieas;
+using System.Linq;
 
 namespace STS.DAL.Mapper.Profiles
 {
