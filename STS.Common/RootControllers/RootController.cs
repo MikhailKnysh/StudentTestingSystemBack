@@ -1,11 +1,11 @@
 ﻿using System.Net;
-using Common.ApiErrors.Extensions;
+using STS.Common.ApiErrors.Extensions;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Common.RootControllers
+namespace STS.Common.RootControllers
 {
     [ApiController]
     [Route("api/[controller]")]

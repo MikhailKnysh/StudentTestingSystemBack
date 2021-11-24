@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Common.Middlewares
+namespace STS.Common.Middlewares
 {
     public class ErrorHandlerMiddleware
     {

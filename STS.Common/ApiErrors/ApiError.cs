@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 
-namespace Common.ApiErrors
+namespace STS.Common.ApiErrors
 {
     public class ApiError
     {

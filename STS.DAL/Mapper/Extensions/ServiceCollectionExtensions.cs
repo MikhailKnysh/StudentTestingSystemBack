@@ -11,6 +11,7 @@ namespace STS.DAL.Mapper.Extensions
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new SubjectMapperProfile());
+                mc.AddProfile(new UserMapperProfile());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
