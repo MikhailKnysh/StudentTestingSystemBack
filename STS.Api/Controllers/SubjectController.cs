@@ -4,6 +4,7 @@ using STS.DAL.Interfaces;
 using System.Threading.Tasks;
 using Common.RootControllers;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace STS.Api.Controllers
 {
@@ -23,6 +24,30 @@ namespace STS.Api.Controllers
         public async Task<IActionResult> Create([FromBody] Subject subject)
         {
             var result = await _subjectService.CreateAsync(subject);
+
+            return ToApiResult(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {
+            var result = await _subjectService.GetById(id);
+
+            return ToApiResult(result);
+        }
+
+        [HttpPut("update")]
+        public async Task<IActionResult> Update([FromBody] Subject subject)
+        {
+            var result = await _subjectService.UpdateAsync(subject);
+
+            return ToApiResult(result);
+        }
+
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            var result = await _subjectService.DeleteAsync(id);
 
             return ToApiResult(result);
         }
