@@ -1,8 +1,10 @@
 ﻿using STS.DAL.EntityContext.Context;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace STS.DAL.DataAccess.BaseRepository
 {
@@ -46,9 +48,11 @@ namespace STS.DAL.DataAccess.BaseRepository
             throw new NotImplementedException();
         }
 
-        public Task<IQueryable<T>> WhereAsync(Expression<Func<T, bool>> expression)
+        public async Task<List<T>> WhereAsync(Expression<Func<T, bool>> expression)
         {
-            throw new NotImplementedException();
+            var entities = await _context.Set<T>().Where(expression).ToListAsync();
+
+            return entities;
         }
     }
 }
