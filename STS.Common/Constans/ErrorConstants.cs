@@ -19,5 +19,12 @@
             public const string SessionNotCreated = "Session not been created.";
             public const string InvalidAuthData = "Invalid Auth data.";
         }
+
+        public static class ThemeErrors
+        {
+            public const string ThemeNotCreated = "Theme not been created.";
+            public const string ThemeNotUpdated = "Theme not been updated.";
+            public const string ThemeNotDeleted = "Theme not been deleted.";
+        }
     }
 }
