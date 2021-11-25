@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using STS.DAL.DataAccess.Sessions.Extensions;
 using STS.DAL.DataAccess.Subjects.Extensions;
 using STS.DAL.DataAccess.Users.Extensions;
+using STS.DAL.DataAccess.Themes.Extension;
 using STS.DAL.EntityContext.Extensions;
 using STS.DAL.Mapper.Extensions;
 
@@ -18,6 +19,7 @@ namespace STS.DAL.DataAccess.Extensions
             services.AddSubject();
             services.AddUser();
             services.AddSessionService();
+            services.AddTheme();
         }
     }
 }

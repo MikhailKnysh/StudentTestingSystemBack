@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using STS.DAL.EntityContext.Entitieas;
+using STS.DAL.EntityContext.Entities;
 
 namespace STS.DAL.EntityContext.Context
 {
@@ -7,6 +8,7 @@ namespace STS.DAL.EntityContext.Context
     {
         public DbSet<SubjectEntity> Subjects { get; set; }
         public DbSet<UserEntity> Users { get; set; }
+        public DbSet<ThemeEntity> Themes { get; set; }
 
         public ApplicationContext()
         {
@@ -22,6 +24,14 @@ namespace STS.DAL.EntityContext.Context
             {
                 optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=STS;Integrated Security=True;");
             }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ThemeEntity>()
+                        .HasOne(t => t.Subject)
+                        .WithMany(s => s.Themes)
+                        .HasForeignKey(k => k.SubjectId);
         }
     }
 }
