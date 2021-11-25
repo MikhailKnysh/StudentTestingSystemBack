@@ -2,7 +2,7 @@
 using System.Linq;
 using FluentResults;
 
-namespace Common.ApiErrors.Extensions
+namespace STS.Common.ApiErrors.Extensions
 {
     public static class FluentResultExtensions
     {

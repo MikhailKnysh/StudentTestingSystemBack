@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using System.Collections.Generic;
 
-namespace Common.FluentResult.Extensions
+namespace STS.Common.FluentResult.Extensions
 {
     public static class FluentResultExtensions
     {

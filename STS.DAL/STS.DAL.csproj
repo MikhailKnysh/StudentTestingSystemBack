@@ -20,7 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\STS.Common\STS.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Migrations\20211124211603_SetDefaultUserScript.sql" />
+    <EmbeddedResource Include="Migrations\20211124211603_SetDefaultUserScript.sql" />
   </ItemGroup>
 
 </Project>

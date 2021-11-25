@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Common.Models;
+using STS.Common.Models;
 using STS.DAL.EntityContext.Entitieas;
 using System.Linq;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Models
+namespace STS.Common.Models
 {
     public class Subject
     {

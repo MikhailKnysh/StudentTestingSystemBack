@@ -1,13 +1,16 @@
-﻿using Common.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using STS.DAL.Interfaces;
 using System.Threading.Tasks;
-using Common.RootControllers;
 using Microsoft.Extensions.Logging;
+using STS.Common.Models;
+using STS.Common.RootControllers;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using STS.Common.Constans;
 
 namespace STS.Api.Controllers
 {
+    [Authorize(Policy = RoleConstants.PolicyConstants.AdminAndTeacherPolicy)]
     public class SubjectController : RootController
     {
         private readonly ISubjectService _subjectService;
@@ -19,7 +22,8 @@ namespace STS.Api.Controllers
         {
             _subjectService = subjectService;
         }
-
+        
+        [Authorize(Policy = RoleConstants.PolicyConstants.AdminAndTeacherPolicy)]
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] Subject subject)
         {
@@ -27,7 +31,7 @@ namespace STS.Api.Controllers
 
             return ToApiResult(result);
         }
-
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {

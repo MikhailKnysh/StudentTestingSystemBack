@@ -6,10 +6,10 @@ namespace STS.DAL.EntityContext.Context
     public class ApplicationContext : DbContext
     {
         public DbSet<SubjectEntity> Subjects { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
 
         public ApplicationContext()
         {
-            
         }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
