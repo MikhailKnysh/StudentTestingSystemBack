@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using STS.Common.Auth.Extensions;
 using STS.Common.Middlewares;
 using STS.DAL.DataAccess.Extensions;
@@ -23,6 +24,8 @@ namespace STS.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+            
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -73,6 +76,8 @@ namespace STS.Api
             app.UseRouting();
 
             app.AddAuthentication();
+
+            app.UseSerilogRequestLogging();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

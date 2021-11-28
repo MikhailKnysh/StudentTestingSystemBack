@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace STS.Api
 {
@@ -12,9 +14,16 @@ namespace STS.Api
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostContext, config) =>
+                    config
+                        .AddJsonFile("appsettings.json", false, true)
+                        .AddJsonFile($"appsettings.{hostContext.HostingEnvironment.EnvironmentName}.json", optional: true)
+                        .AddCommandLine(args)
+                        .AddEnvironmentVariables())
                 .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    webBuilder
+                        .UseStartup<Startup>())
+                .UseSerilog((context, config) => config
+                    .ReadFrom.Configuration(context.Configuration));
     }
 }
