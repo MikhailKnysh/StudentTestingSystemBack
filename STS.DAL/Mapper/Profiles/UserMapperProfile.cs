@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
+﻿using System.Linq;
+using AutoMapper;
 using STS.Common.Auth.Models;
 using STS.Common.Models;
 using STS.DAL.EntityContext.Entitieas;
@@ -26,7 +26,9 @@ namespace STS.DAL.Mapper.Profiles
                 .ForMember(dest => dest.Email, opt => opt
                     .MapFrom(src => src.Email))
                 .ForMember(dest => dest.Role, opt => opt
-                    .MapFrom(src => src.Role));
+                    .MapFrom(src => src.Role))
+                .ForMember(dest => dest.GroupIds, opt => opt
+                    .MapFrom(src => src.Groups.Select(g => g.Id)));
         }
 
         private void CreateMapUserToAuthModelForCreateToken()

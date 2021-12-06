@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using STS.DAL.DataAccess.Groups.Extensions;
 using STS.DAL.DataAccess.Sessions.Extensions;
 using STS.DAL.DataAccess.Subjects.Extensions;
 using STS.DAL.DataAccess.Users.Extensions;
@@ -20,6 +21,7 @@ namespace STS.DAL.DataAccess.Extensions
             services.AddUser();
             services.AddSessionService();
             services.AddTheme();
+            services.AddGroup();
         }
     }
 }

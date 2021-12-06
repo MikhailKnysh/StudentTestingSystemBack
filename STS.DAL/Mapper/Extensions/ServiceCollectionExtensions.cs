@@ -13,6 +13,7 @@ namespace STS.DAL.Mapper.Extensions
                 mc.AddProfile(new SubjectMapperProfile());
                 mc.AddProfile(new UserMapperProfile());
                 mc.AddProfile(new ThemeMapperProfile());
+                mc.AddProfile(new GroupMapperProfile());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();

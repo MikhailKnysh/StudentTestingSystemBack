@@ -26,5 +26,13 @@
             public const string ThemeNotUpdated = "Theme not been updated.";
             public const string ThemeNotDeleted = "Theme not been deleted.";
         }
+
+        public static class GroupErrors
+        {
+            public const string GroupNotCreated = "Group not been created.";
+            public const string GroupNotUpdated = "Group not been updated.";
+            public const string GroupNotDeleted = "Group not been deleted.";
+            public const string UserNotAdded = "User not been added to group";
+        }
     }
 }

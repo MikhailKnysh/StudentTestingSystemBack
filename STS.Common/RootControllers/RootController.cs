@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace STS.Common.RootControllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class RootController : Controller
     {
         protected readonly ILogger<RootController> _logger;

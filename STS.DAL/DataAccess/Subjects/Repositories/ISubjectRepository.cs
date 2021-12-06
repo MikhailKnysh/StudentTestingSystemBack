@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace STS.DAL.DataAccess.Subjects.Repositories
 {
-    public interface ISubjectRepository<T> : IBaseRepository<T>
+    public interface ISubjectRepository : IBaseRepository<SubjectEntity>
     {
         Task<SubjectEntity> GetById(Guid id);
         Task<List<SubjectEntity>> GetAll();

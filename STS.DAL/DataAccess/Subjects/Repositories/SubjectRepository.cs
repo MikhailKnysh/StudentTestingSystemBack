@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace STS.DAL.DataAccess.Subjects.Repositories
 {
-    public class SubjectRepository : BaseRepositoryAbstract<SubjectEntity>, ISubjectRepository<SubjectEntity>
+    public class SubjectRepository : BaseRepositoryAbstract<SubjectEntity>, ISubjectRepository
     {
         public SubjectRepository(
             ApplicationContext context

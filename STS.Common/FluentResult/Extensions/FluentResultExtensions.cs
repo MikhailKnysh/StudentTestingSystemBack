@@ -1,4 +1,5 @@
-﻿using FluentResults;
+﻿using System.Collections.Generic;
+using FluentResults;
 
 namespace STS.Common.FluentResult.Extensions
 {
@@ -13,6 +14,12 @@ namespace STS.Common.FluentResult.Extensions
             where T : class
         {
             return entity is not null ? Result.Ok(entity) : Result.Fail(errorMessage);
+        }
+
+        public static Result<List<T>> CheckCollectionNullOrEmpty<T>(this List<T> entities, string errorMessage)
+            where T : class
+        {
+            return entities is not null && entities.Count > 0 ? Result.Ok(entities) : Result.Fail(errorMessage);
         }
     }
 }
