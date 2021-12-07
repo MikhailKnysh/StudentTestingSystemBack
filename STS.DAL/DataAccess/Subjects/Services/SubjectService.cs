@@ -15,11 +15,11 @@ namespace STS.DAL.DataAccess.Subjects.Services
 {
     public class SubjectService : ISubjectService
     {
-        private readonly ISubjectRepository<SubjectEntity> _subjectRepository;
+        private readonly ISubjectRepository _subjectRepository;
         private readonly IMapper _mapper;
 
         public SubjectService(
-            ISubjectRepository<SubjectEntity> subjectRepository,
+            ISubjectRepository subjectRepository,
             IMapper mapper
         )
         {

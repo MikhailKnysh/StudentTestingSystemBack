@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using STS.DAL.EntityContext.Entities;
 
 namespace STS.DAL.EntityContext.Entitieas
 {
@@ -10,5 +12,12 @@ namespace STS.DAL.EntityContext.Entitieas
         public string Email { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
+
+        public ICollection<GroupEntity> Groups { get; set; }
+
+        public UserEntity()
+        {
+            Groups = new HashSet<GroupEntity>(); 
+        }
     }
 }

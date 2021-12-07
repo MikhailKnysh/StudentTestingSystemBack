@@ -10,7 +10,7 @@ namespace STS.DAL.DataAccess.Subjects.Extensions
     {
         public static void AddSubject(this IServiceCollection services)
         {
-            services.AddScoped<ISubjectRepository<SubjectEntity>, SubjectRepository>();
+            services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<ISubjectService, SubjectService>();
         }
     }
