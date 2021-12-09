@@ -28,7 +28,7 @@ namespace STS.DAL.DataAccess.Sessions.Services
         public async Task<Result<string>> CreateSession(AuthModel authModel)
         {
             Result<string> result = Result.Fail(ErrorConstants.SessionErrors.InvalidAuthData);
-            var userResult = await _userService.GetUserByAuthData(authModel);
+            var userResult = await _userService.GetUserByAuthDataAsync(authModel);
             if (userResult.IsSuccess)
             {
                 var authModelForCreateToken = _mapper.Map<AuthModelForCreateToken>(userResult.Value);
