@@ -1,4 +1,6 @@
-﻿namespace STS.Common.Constans
+﻿using Microsoft.AspNetCore.Hosting;
+
+namespace STS.Common.Constans
 {
     public static class ErrorConstants
     {
@@ -7,6 +9,14 @@
             public const string DataNotFound = "Data not found.";
         }
 
+        public static class UserError
+        {
+            public const string UserNotCreated = "User not been created.";
+            public const string UserNotUpdated = "User not been updated.";
+            public const string UserNotDeleted = "User not been deleted.";
+            public const string PasswordNotUpdated = "Password not been updated.";
+        }
+        
         public static class SubjectErrors
         {
             public const string SubjectNotCreated = "Subject not been created.";

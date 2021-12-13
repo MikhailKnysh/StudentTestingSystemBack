@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using STS.Common.Cryptography.Extensions;
+using STS.Common.Generators.Extensions;
 using STS.DAL.DataAccess.Groups.Extensions;
 using STS.DAL.DataAccess.Sessions.Extensions;
 using STS.DAL.DataAccess.Subjects.Extensions;
@@ -16,6 +18,8 @@ namespace STS.DAL.DataAccess.Extensions
         {
             services.AddDatabaseContext(configuration);
             services.AddAutoMapper();
+            services.AddEncryptor();
+            services.AddGenerators();
 
             services.AddSubject();
             services.AddUser();

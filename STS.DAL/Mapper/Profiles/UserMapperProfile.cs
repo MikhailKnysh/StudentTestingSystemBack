@@ -11,6 +11,7 @@ namespace STS.DAL.Mapper.Profiles
         public UserMapperProfile()
         {
             CreateMapUserEntityToUser();
+            CreateMapUserToUserEntity();
             CreateMapUserToAuthModelForCreateToken();
         }
 
@@ -29,6 +30,21 @@ namespace STS.DAL.Mapper.Profiles
                     .MapFrom(src => src.Role))
                 .ForMember(dest => dest.GroupIds, opt => opt
                     .MapFrom(src => src.Groups.Select(g => g.Id)));
+        }
+
+        private void CreateMapUserToUserEntity()
+        {
+            CreateMap<User, UserEntity>()
+                .ForMember(dest => dest.Id, opt => opt
+                    .MapFrom(src => src.Id))
+                .ForMember(dest => dest.FirstName, opt => opt
+                    .MapFrom(src => src.FirstName))
+                .ForMember(dest => dest.LastName, opt => opt
+                    .MapFrom(src => src.LastName))
+                .ForMember(dest => dest.Email, opt => opt
+                    .MapFrom(src => src.Email))
+                .ForMember(dest => dest.Role, opt => opt
+                    .MapFrom(src => src.Role));
         }
 
         private void CreateMapUserToAuthModelForCreateToken()
