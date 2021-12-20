@@ -9,6 +9,13 @@ namespace STS.Common.Constans
             public const string DataNotFound = "Data not found.";
         }
 
+        public static class QuestionError
+        {
+            public const string QuestionNotCreated = "Question not been created.";
+            public const string QuestionNotUpdated = "Question not been updated.";
+            public const string QuestionNotDeleted = "Question not been deleted.";
+        }
+
         public static class UserError
         {
             public const string UserNotCreated = "User not been created.";
@@ -16,7 +23,7 @@ namespace STS.Common.Constans
             public const string UserNotDeleted = "User not been deleted.";
             public const string PasswordNotUpdated = "Password not been updated.";
         }
-        
+
         public static class SubjectErrors
         {
             public const string SubjectNotCreated = "Subject not been created.";
@@ -43,6 +50,13 @@ namespace STS.Common.Constans
             public const string GroupNotUpdated = "Group not been updated.";
             public const string GroupNotDeleted = "Group not been deleted.";
             public const string UserNotAdded = "User not been added to group";
+        }
+
+        public static class AnswerErrors
+        {
+            public const string AnswerNotCreated = "Answer not been created.";
+            public const string AnswerNotUpdated = "Answer not been updated.";
+            public const string AnswerNotDeleted = "Answer not been deleted.";
         }
     }
 }

@@ -15,9 +15,12 @@ namespace STS.DAL.EntityContext.Entitieas
 
         public ICollection<GroupEntity> Groups { get; set; }
 
+        public ICollection<QuestionEntity> Questions { get; set; }
+
         public UserEntity()
         {
-            Groups = new HashSet<GroupEntity>(); 
+            Groups = new HashSet<GroupEntity>();
+            Questions = new HashSet<QuestionEntity>();
         }
     }
 }

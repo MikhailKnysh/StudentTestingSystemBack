@@ -14,9 +14,10 @@ namespace STS.DAL.Mapper.Extensions
                 mc.AddProfile(new UserMapperProfile());
                 mc.AddProfile(new ThemeMapperProfile());
                 mc.AddProfile(new GroupMapperProfile());
+                mc.AddProfile(new AnswerMapperProfile());
             });
 
-            IMapper mapper = mapperConfig.CreateMapper();
+            var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
         }
     }

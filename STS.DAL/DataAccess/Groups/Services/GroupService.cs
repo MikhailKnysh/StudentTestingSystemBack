@@ -54,7 +54,7 @@ namespace STS.DAL.DataAccess.Groups.Services
             var foundedGroupEntity = await _groupRepository.FindAsync(e => e.Id == group.Id);
             if (foundedGroupEntity is not null)
             {
-                foundedGroupEntity.Name = group.Name;
+                foundedGroupEntity.Name = group.Title;
                 foundedGroupEntity.Users = null;
                 responseDb = await _groupRepository.UpdateAsync(foundedGroupEntity);
             }
