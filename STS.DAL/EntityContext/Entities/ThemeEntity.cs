@@ -1,5 +1,6 @@
 ﻿using STS.DAL.EntityContext.Entitieas;
 using System;
+using System.Collections.Generic;
 
 namespace STS.DAL.EntityContext.Entities
 {
@@ -9,5 +10,11 @@ namespace STS.DAL.EntityContext.Entities
         public string Title { get; set; }
         public Guid SubjectId { get; set; }
         public SubjectEntity Subject { get; set; }
+        public ICollection<QuestionEntity> Questions { get; set; }
+
+        public ThemeEntity()
+        {
+            Questions = new HashSet<QuestionEntity>();
+        }
     }
 }

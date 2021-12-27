@@ -11,6 +11,8 @@ namespace STS.DAL.EntityContext.Context
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<ThemeEntity> Themes { get; set; }
         public DbSet<GroupEntity> Groups { get; set; }
+        public DbSet<QuestionEntity> Questions { get; set; }
+        public DbSet<AnswerEntity> Answers { get; set; }
 
         public ApplicationContext()
         {
@@ -41,6 +43,20 @@ namespace STS.DAL.EntityContext.Context
             {
                 entity.HasMany(groupEntity => groupEntity.Groups)
                     .WithMany(groupEntity => groupEntity.Users);
+            });
+
+            modelBuilder.Entity<QuestionEntity>(entity =>
+            {
+                entity.HasOne(questionEntity => questionEntity.User)
+                    .WithMany(userEntity => userEntity.Questions)
+                    .HasForeignKey(questionEntity => questionEntity.UserId);
+
+                entity.HasOne(questionEntity => questionEntity.Theme)
+                    .WithMany(themeEntity => themeEntity.Questions)
+                    .HasForeignKey(questionEntity => questionEntity.ThemeId);
+                entity.HasMany(questionEntity => questionEntity.Answers)
+                    .WithOne(answerEntity => answerEntity.Question)
+                    .HasForeignKey(answerEntity => answerEntity.Id_Question);
             });
         }
     }

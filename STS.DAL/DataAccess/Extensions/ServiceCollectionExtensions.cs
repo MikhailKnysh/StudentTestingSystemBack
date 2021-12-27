@@ -2,7 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using STS.Common.Cryptography.Extensions;
 using STS.Common.Generators.Extensions;
+using STS.DAL.DataAccess.Answers.Extensions;
 using STS.DAL.DataAccess.Groups.Extensions;
+using STS.DAL.DataAccess.Questions.Extensions;
 using STS.DAL.DataAccess.Sessions.Extensions;
 using STS.DAL.DataAccess.Subjects.Extensions;
 using STS.DAL.DataAccess.Users.Extensions;
@@ -26,6 +28,8 @@ namespace STS.DAL.DataAccess.Extensions
             services.AddSessionService();
             services.AddTheme();
             services.AddGroup();
+            services.AddAnswer();
+            services.AddQuestion();
         }
     }
 }

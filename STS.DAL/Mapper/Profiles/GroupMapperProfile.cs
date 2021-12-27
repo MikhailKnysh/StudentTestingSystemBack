@@ -17,7 +17,7 @@ namespace STS.DAL.Mapper.Profiles
             CreateMap<GroupEntity, Group>()
                 .ForMember(dest => dest.Id, opt => opt
                     .MapFrom(src => src.Id))
-                .ForMember(dest => dest.Name, opt => opt
+                .ForMember(dest => dest.Title, opt => opt
                     .MapFrom(src => src.Name));
         }
 
@@ -27,7 +27,7 @@ namespace STS.DAL.Mapper.Profiles
                 .ForMember(dest => dest.Id, opt => opt
                     .MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt
-                    .MapFrom(src => src.Name));
+                    .MapFrom(src => src.Title));
         }
     }
 }
