@@ -13,6 +13,8 @@ namespace STS.DAL.EntityContext.Context
         public DbSet<GroupEntity> Groups { get; set; }
         public DbSet<QuestionEntity> Questions { get; set; }
         public DbSet<AnswerEntity> Answers { get; set; }
+        public DbSet<TestEntity> Tests { get; set; }
+        public DbSet<StudentAnswerEntity> StudentAnswers { get; set; }
 
         public ApplicationContext()
         {
@@ -34,9 +36,9 @@ namespace STS.DAL.EntityContext.Context
         {
             modelBuilder.Entity<ThemeEntity>(entity =>
             {
-                entity.HasOne(t => t.Subject)
-                    .WithMany(s => s.Themes)
-                    .HasForeignKey(k => k.SubjectId);
+                entity.HasOne(themeEntity => themeEntity.Subject)
+                    .WithMany(subjectEntity => subjectEntity.Themes)
+                    .HasForeignKey(themeEntity => themeEntity.SubjectId);
             });
 
             modelBuilder.Entity<UserEntity>(entity =>
@@ -57,6 +59,17 @@ namespace STS.DAL.EntityContext.Context
                 entity.HasMany(questionEntity => questionEntity.Answers)
                     .WithOne(answerEntity => answerEntity.Question)
                     .HasForeignKey(answerEntity => answerEntity.Id_Question);
+            });
+            modelBuilder.Entity<TestEntity>(entity =>
+            {
+                entity.HasMany(testEntity => testEntity.Answers)
+                    .WithOne(studentAnswerEntity => studentAnswerEntity.Test)
+                    .HasForeignKey(studentAnswerEntity => studentAnswerEntity.TestId);
+                
+                entity.HasOne(testEntity => testEntity.Theme);
+                
+                entity.HasOne(testEntity => testEntity.Student)
+                    .WithMany(userEntity => userEntity.Tests);
             });
         }
     }

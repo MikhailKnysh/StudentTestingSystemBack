@@ -6,7 +6,9 @@ using STS.DAL.DataAccess.Answers.Extensions;
 using STS.DAL.DataAccess.Groups.Extensions;
 using STS.DAL.DataAccess.Questions.Extensions;
 using STS.DAL.DataAccess.Sessions.Extensions;
+using STS.DAL.DataAccess.StudentAnswers.Extensions;
 using STS.DAL.DataAccess.Subjects.Extensions;
+using STS.DAL.DataAccess.Tests.Extensions;
 using STS.DAL.DataAccess.Users.Extensions;
 using STS.DAL.DataAccess.Themes.Extension;
 using STS.DAL.EntityContext.Extensions;
@@ -30,6 +32,8 @@ namespace STS.DAL.DataAccess.Extensions
             services.AddGroup();
             services.AddAnswer();
             services.AddQuestion();
+            services.AddTest();
+            services.AddStudentAnswer();
         }
     }
 }
