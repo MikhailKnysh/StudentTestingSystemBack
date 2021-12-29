@@ -58,5 +58,19 @@ namespace STS.Common.Constans
             public const string AnswerNotUpdated = "Answer not been updated.";
             public const string AnswerNotDeleted = "Answer not been deleted.";
         }
+
+        public static class TestError
+        {
+            public const string TestNotCreated = "Test not been created.";
+            public const string TestNotUpdated = "Test not been updated.";
+            public const string TestNotDeleted = "Test not been deleted.";
+        }
+
+        public static class StudentAnswerError
+        {
+            public const string StudentAnswerNotCreated = "StudentAnswer not been created.";
+            public const string StudentAnswerNotUpdated = "StudentAnswer not been updated.";
+            public const string StudentAnswerNotDeleted = "StudentAnswer not been deleted.";
+        }
     }
 }

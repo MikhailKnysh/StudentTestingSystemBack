@@ -17,5 +17,6 @@ namespace STS.DAL.DataAccess.Questions.Services
         Task<Result> DeleteQuestionAsync(Guid id);
         Task<Result> UpdateQuestionAsync(Question question);
         Task<Result> LockQuestionAsync(Guid id, bool isLocked);
+        Task<Result<Question>> GetNextQuestionAsync(Guid testId);
     }
 }

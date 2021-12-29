@@ -112,5 +112,11 @@ namespace STS.DAL.DataAccess.Questions.Services
 
             return responseDb.CheckDbResponse(ErrorConstants.QuestionError.QuestionNotUpdated);
         }
+
+        public Task<Result<Question>> GetNextQuestionAsync(Guid testId)
+        {
+            // todo сюда добавить поиск вопроса по формуле из диплома
+            return null;
+        }
     }
 }

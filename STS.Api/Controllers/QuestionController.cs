@@ -91,5 +91,13 @@ namespace STS.Api.Controllers
 
             return ToApiResult(result);
         }
+
+        [HttpPost("get/next/{testId}")]
+        public async Task<IActionResult> GetNextQuestion(Guid testId)
+        {
+            var result = _questionService.GetNextQuestionAsync(testId);
+
+            return ToApiResult(result);
+        }
     }
 }
