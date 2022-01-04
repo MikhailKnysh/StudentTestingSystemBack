@@ -57,6 +57,7 @@ namespace STS.DAL.DataAccess.Subjects.Services
         {
             var foundedEntity = await _subjectRepository.FindAsync(g => g.Id == subject.Id);
             foundedEntity.Title = subject.Title;
+            
 
             var responseDb = await _subjectRepository.UpdateAsync(foundedEntity);
 

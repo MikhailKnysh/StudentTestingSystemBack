@@ -25,7 +25,7 @@ namespace STS.Api.Controllers
         
         [Authorize(Policy = RoleConstants.PolicyConstants.AdminAndTeacherPolicy)]
         [HttpPost("create")]
-        public async Task<IActionResult> Create([FromBody] Subject subject)
+        public async Task<IActionResult> CreateAsync([FromBody] Subject subject)
         {
             var result = await _subjectService.CreateAsync(subject);
 
@@ -33,7 +33,7 @@ namespace STS.Api.Controllers
         }
         
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        public async Task<IActionResult> GetByIdAsync([FromRoute] Guid id)
         {
             var result = await _subjectService.GetById(id);
 
@@ -41,7 +41,7 @@ namespace STS.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAllAsync()
         {
             var result = await _subjectService.GetAll();
 
@@ -49,7 +49,7 @@ namespace STS.Api.Controllers
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> Update([FromBody] Subject subject)
+        public async Task<IActionResult> UpdateAsync([FromBody] Subject subject)
         {
             var result = await _subjectService.UpdateAsync(subject);
 
@@ -57,7 +57,7 @@ namespace STS.Api.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        public async Task<IActionResult> DeleteAsync([FromRoute] Guid id)
         {
             var result = await _subjectService.DeleteAsync(id);
 

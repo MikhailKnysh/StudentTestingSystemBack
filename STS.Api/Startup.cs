@@ -30,8 +30,8 @@ namespace STS.Api
 
             services.AddSwaggerGen(c =>
             {
-                var swaggerTitle = $"Connectors API { Configuration.GetValue<string>("ASPNETCORE_ENVIRONMENT")}";
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = swaggerTitle, Version = "v1" });
+                var swaggerTitle = $"Connectors API {Configuration.GetValue<string>("ASPNETCORE_ENVIRONMENT")}";
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = swaggerTitle, Version = "v1"});
                 var securityScheme = new OpenApiSecurityScheme
                 {
                     Name = "JWT Authentication",
@@ -47,7 +47,7 @@ namespace STS.Api
                     }
                 };
                 c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement 
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
                         securityScheme, new string[] { }
@@ -58,6 +58,7 @@ namespace STS.Api
             services.AddAuthentication(Configuration);
 
             services.AddDataAccess(Configuration);
+            services.AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -65,6 +66,8 @@ namespace STS.Api
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "STS.Api v1"));
+
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseHttpsRedirection();
 

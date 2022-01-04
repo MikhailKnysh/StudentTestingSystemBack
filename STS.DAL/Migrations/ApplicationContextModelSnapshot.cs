@@ -40,10 +40,15 @@ namespace STS.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Subjects");
                 });
@@ -261,6 +266,17 @@ namespace STS.DAL.Migrations
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("STS.DAL.EntityContext.Entitieas.SubjectEntity", b =>
+                {
+                    b.HasOne("STS.DAL.EntityContext.Entitieas.UserEntity", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("STS.DAL.EntityContext.Entities.AnswerEntity", b =>

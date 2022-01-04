@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using STS.Common.Auth.Models;
 using STS.Common.RootControllers;
 using STS.DAL.DataAccess.Sessions.Services;
+using STS.DAL.DataAccess.Users.Services;
 
 namespace STS.Api.Controllers
 {
@@ -12,21 +13,33 @@ namespace STS.Api.Controllers
     public class SessionController : RootController
     {
         private readonly ISessionService _sessionService;
+        private readonly IUserService _userService;
 
         public SessionController(
             ISessionService sessionService,
+            IUserService userService,
             ILogger<RootController> logger
         ) : base(logger)
         {
             _sessionService = sessionService;
+            _userService = userService;
         }
 
         [HttpPost("session/create")]
         public async Task<IActionResult> CreateSession(AuthModel authModel)
         {
-            var result = await _sessionService.CreateSession(authModel);
+            var tokenResult = await _sessionService.CreateSession(authModel);
+            var userResult = await _userService.GetUserByAuthDataAsync(authModel);
+            if (userResult.IsSuccess && tokenResult.IsSuccess)
+            {
+                userResult.Value.Token = tokenResult.Value;
+            }
+            else if (tokenResult.IsFailed)
+            {
+                return ToApiResult(tokenResult);
+            }
 
-            return ToApiResult(result);
+            return ToApiResult(userResult);
         }
     }
 }
