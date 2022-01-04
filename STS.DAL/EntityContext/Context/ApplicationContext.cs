@@ -28,7 +28,9 @@ namespace STS.DAL.EntityContext.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=STS;Integrated Security=True;");
+                optionsBuilder.UseSqlServer(
+                    "Server=tcp:stsapplicationsqlserver.database.windows.net,1433;Initial Catalog=STS;Persist Security Info=False;User ID=stsapplicationsqlserver-admin;Password=360OYYD32LSFP13G$;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+                );
             }
         }
 
@@ -65,9 +67,9 @@ namespace STS.DAL.EntityContext.Context
                 entity.HasMany(testEntity => testEntity.Answers)
                     .WithOne(studentAnswerEntity => studentAnswerEntity.Test)
                     .HasForeignKey(studentAnswerEntity => studentAnswerEntity.TestId);
-                
+
                 entity.HasOne(testEntity => testEntity.Theme);
-                
+
                 entity.HasOne(testEntity => testEntity.Student)
                     .WithMany(userEntity => userEntity.Tests);
             });
