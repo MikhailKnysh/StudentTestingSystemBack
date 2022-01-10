@@ -28,7 +28,7 @@ namespace STS.Api.Controllers
             return ToApiResult(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("get/all/subject/{id}")]
         public async Task<IActionResult> GetAllBySubjectId([FromRoute] Guid id)
         {
             var result = await _themeService.GetAllBySubjectId(id);

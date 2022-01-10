@@ -15,6 +15,7 @@ namespace STS.Api
 {
     public class Startup
     {
+        private readonly string _corsPolicy = "_myAllowSpecificOrigins";
         public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
@@ -38,7 +39,7 @@ namespace STS.Api
                     Description = "Enter JWT Bearer token _only_",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.Http,
-                    Scheme = "bearer", // must be lower case
+                    Scheme = "bearer",
                     BearerFormat = "JWT",
                     Reference = new OpenApiReference
                     {
@@ -58,7 +59,16 @@ namespace STS.Api
             services.AddAuthentication(Configuration);
 
             services.AddDataAccess(Configuration);
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: _corsPolicy,
+                    builder =>
+                    {
+                        builder.AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowAnyOrigin();
+                    });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -67,7 +77,7 @@ namespace STS.Api
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "STS.Api v1"));
 
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseCors(_corsPolicy);
 
             app.UseHttpsRedirection();
 

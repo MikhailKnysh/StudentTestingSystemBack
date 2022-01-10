@@ -73,6 +73,7 @@ namespace STS.DAL.DataAccess.Users.Services
             {
                 foundedUser.FirstName = user.FirstName;
                 foundedUser.LastName = user.LastName;
+                foundedUser.Email = user.Email;
             }
 
             var responseDb = await _userRepository.UpdateAsync(foundedUser);
