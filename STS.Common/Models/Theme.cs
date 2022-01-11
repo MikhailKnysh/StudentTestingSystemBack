@@ -7,7 +7,7 @@ namespace Common.Models
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
-        public Subject Subject { get; set; }
+        public Guid SubjectId { get; set; }
         public int CountQuestions { get; set; }
     }
 }

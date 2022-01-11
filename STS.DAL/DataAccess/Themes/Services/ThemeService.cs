@@ -48,7 +48,7 @@ namespace STS.DAL.DataAccess.Themes.Services
         {
             var foundedEntity = await _themeRepository.FindAsync(s => s.Id == theme.Id);
             foundedEntity.Title = theme.Title;
-            foundedEntity.SubjectId = theme.Subject.Id;
+            foundedEntity.SubjectId = theme.SubjectId;
             foundedEntity.Subject = null;
 
             var responseDb = await _themeRepository.UpdateAsync(foundedEntity);
