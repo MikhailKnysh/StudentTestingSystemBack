@@ -8,6 +8,7 @@ using System.Text;
 using FluentResults;
 using STS.Common.Auth.Models;
 using STS.Common.Constans;
+using STS.Common.FluentResult.Extensions;
 
 namespace STS.Common.Auth.Services
 {
@@ -22,9 +23,9 @@ namespace STS.Common.Auth.Services
             _authConfig = authConfigOptions.Value;
         }
 
-        public Result<string> CreateAuthToken(AuthModelForCreateToken authModel)
+        public Result<Token> CreateAuthToken(AuthModelForCreateToken authModel)
         {
-            Result<string> result = Result.Fail(ErrorConstants.SessionErrors.SessionNotCreated);
+            Result<Token> result = Result.Fail(ErrorConstants.SessionErrors.SessionNotCreated);
             if (authModel.Id != Guid.Empty && !string.IsNullOrEmpty(authModel.Role))
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
@@ -43,8 +44,11 @@ namespace STS.Common.Auth.Services
                         new SymmetricSecurityKey(bytes), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
-
-                result = Result.Ok(tokenHandler.WriteToken(token));
+                result = new Token()
+                {
+                    Bearer = tokenHandler.WriteToken(token),
+                    Expires = _authConfig.TokenTimeExpiration,
+                }.CheckEntityNull(ErrorConstants.SessionErrors.SessionNotCreated);
             }
 
             return result;

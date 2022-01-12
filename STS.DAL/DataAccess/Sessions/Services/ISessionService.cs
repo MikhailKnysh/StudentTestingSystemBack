@@ -6,6 +6,6 @@ namespace STS.DAL.DataAccess.Sessions.Services
 {
     public interface ISessionService
     {
-        Task<Result<string>> CreateSession(AuthModel authModel);
+        Task<Result<Token>> CreateSession(AuthModel authModel);
     }
 }

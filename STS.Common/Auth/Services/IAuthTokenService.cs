@@ -5,6 +5,6 @@ namespace STS.Common.Auth.Services
 {
     public interface IAuthTokenService
     {
-        Result<string> CreateAuthToken(AuthModelForCreateToken authModel);
+        Result<Token> CreateAuthToken(AuthModelForCreateToken authModel);
     }
 }

@@ -32,7 +32,9 @@ namespace STS.Api.Controllers
             var userResult = await _userService.GetUserByAuthDataAsync(authModel);
             if (userResult.IsSuccess && tokenResult.IsSuccess)
             {
-                userResult.Value.Token = tokenResult.Value;
+                userResult.Value.Token = tokenResult.Value.Bearer;
+                userResult.Value.Expires = tokenResult.Value.Expires;
+
             }
             else if (tokenResult.IsFailed)
             {
