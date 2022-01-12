@@ -25,17 +25,30 @@ namespace STS.DAL.DataAccess.Tests.Services
             _mapper = mapper;
         }
 
-        public async Task<Result> CreateTestAsync(Test test)
+        public async Task<Result<Test>> CreateTestAsync(Guid userId, Guid themeId)
         {
-            var testEntity = _mapper.Map<TestEntity>(test);
+            var testEntity = new TestEntity()
+            {
+                Id = Guid.NewGuid(),
+                UserId = userId,
+                ThemeId = themeId,
+                Mark = new Random().Next(20, 100),
+                DateTimeFinish = DateTimeOffset.Now.ToUnixTimeSeconds(),
+                // TODO: Calculate Mark and other fields
+            };
             var responseDb = await _testRepository.CreateAsync(testEntity);
+            Test test = null;
+            if (responseDb > 0)
+            {
+                test = _mapper.Map<Test>(testEntity);
+            }
 
-            return responseDb.CheckDbResponse(ErrorConstants.TestError.TestNotCreated);
+            return test.CheckEntityNull(ErrorConstants.TestError.TestNotCreated);
         }
 
         public async Task<Result<List<Test>>> GetAllTestsByUserIdAsync(Guid userId)
         {
-            var testEntities = await _testRepository.WhereAsync(t => t.UserId == userId);
+            var testEntities = await _testRepository.GetAllTestsByUserIdAsync(userId);
             var tests = _mapper.Map<List<Test>>(testEntities);
 
             return tests.CheckCollectionNullOrEmpty(ErrorConstants.CommonErrors.DataNotFound);
@@ -43,7 +56,7 @@ namespace STS.DAL.DataAccess.Tests.Services
 
         public async Task<Result<Test>> GetTestByIdAsync(Guid id)
         {
-            var testEntity = await _testRepository.FindAsync(t => t.Id == id);
+            var testEntity = await _testRepository.GetTestByIdAsync(id);
             var test = _mapper.Map<Test>(testEntity);
 
             return test.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);

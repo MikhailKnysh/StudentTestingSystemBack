@@ -10,5 +10,7 @@ namespace STS.DAL.DataAccess.Tests.Repositories
     public interface ITestRepository : IBaseRepository<TestEntity>
     {
         Task<List<TestEntity>> GetAllTestsByGroupAsync(Guid groupId);
+        Task<List<TestEntity>> GetAllTestsByUserIdAsync(Guid userId);
+        Task<TestEntity> GetTestByIdAsync(Guid id);
     }
 }

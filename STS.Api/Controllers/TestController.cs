@@ -20,10 +20,10 @@ namespace STS.Api.Controllers
             _testService = testService;
         }
 
-        [HttpPost("create")]
-        public async Task<IActionResult> CreateTestAsync(Test test)
+        [HttpPost("get/result/{userId}/{themeId}")]
+        public async Task<IActionResult> GetResult(Guid userId, Guid themeId)
         {
-            var result = await _testService.CreateTestAsync(test);
+            var result = await _testService.CreateTestAsync(userId, themeId);
 
             return ToApiResult(result);
         }
