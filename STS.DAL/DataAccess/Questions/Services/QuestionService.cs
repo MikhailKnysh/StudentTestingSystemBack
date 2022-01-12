@@ -67,6 +67,7 @@ namespace STS.DAL.DataAccess.Questions.Services
         public async Task<Result> CreateQuestionAsync(Question question)
         {
             var questionEntity = _mapper.Map<QuestionEntity>(question);
+            questionEntity.Id = Guid.NewGuid();
             questionEntity.Answers = null;
             questionEntity.User = null;
             questionEntity.Theme = null;

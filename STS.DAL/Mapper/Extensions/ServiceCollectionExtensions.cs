@@ -15,6 +15,7 @@ namespace STS.DAL.Mapper.Extensions
                 mc.AddProfile(new ThemeMapperProfile());
                 mc.AddProfile(new GroupMapperProfile());
                 mc.AddProfile(new AnswerMapperProfile());
+                mc.AddProfile(new QuestionMapperProfile());
             });
 
             var mapper = mapperConfig.CreateMapper();
