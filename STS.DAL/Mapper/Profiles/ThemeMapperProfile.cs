@@ -22,7 +22,7 @@ namespace STS.DAL.Mapper.Profiles
                 .ForMember(dest => dest.SubjectId, opt => opt
                     .MapFrom(src => src.Subject.Id))
                 .ForMember(dest => dest.CountQuestions, opt => opt
-                    .MapFrom(src => src.Questions.Count));
+                    .MapFrom(src => src.CountQuestions));
         }
 
         private void CreateMapThemeToThemeEntity()
@@ -31,7 +31,9 @@ namespace STS.DAL.Mapper.Profiles
                 .ForMember(dest => dest.Id, opt => opt
                     .MapFrom(src => src.Id))
                 .ForMember(dest => dest.Title, opt => opt
-                    .MapFrom(src => src.Title));
+                    .MapFrom(src => src.Title))
+                .ForMember(dest => dest.CountQuestions, opt => opt
+                    .MapFrom(src => src.CountQuestions));
         }
     }
 }
