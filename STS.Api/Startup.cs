@@ -1,14 +1,13 @@
-using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using STS.Common.Auth.Extensions;
 using STS.Common.Middlewares;
+using STS.Common.SMTP.Extensions;
 using STS.DAL.DataAccess.Extensions;
 
 namespace STS.Api
@@ -57,7 +56,7 @@ namespace STS.Api
             });
 
             services.AddAuthentication(Configuration);
-
+            services.AddMailSender(Configuration);
             services.AddDataAccess(Configuration);
             services.AddCors(options =>
             {

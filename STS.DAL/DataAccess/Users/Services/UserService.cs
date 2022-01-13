@@ -10,6 +10,7 @@ using STS.Common.Cryptography.Services;
 using STS.Common.FluentResult.Extensions;
 using STS.Common.Generators.Services;
 using STS.Common.Models;
+using STS.Common.SMTP.Service;
 using STS.DAL.DataAccess.Users.Repositories;
 using STS.DAL.EntityContext.Entitieas;
 
@@ -20,18 +21,21 @@ namespace STS.DAL.DataAccess.Users.Services
         private readonly IUserRepository _userRepository;
         private readonly IStringGeneratorService _stringGeneratorService;
         private readonly IEncryptorService _encryptorService;
+        private readonly IMailSenderService _mailSenderService;
         private readonly IMapper _mapper;
 
         public UserService(
             IUserRepository userRepository,
             IStringGeneratorService stringGeneratorService,
             IEncryptorService encryptorService,
+            IMailSenderService mailSenderService,
             IMapper mapper
         )
         {
             _userRepository = userRepository;
             _stringGeneratorService = stringGeneratorService;
             _encryptorService = encryptorService;
+            _mailSenderService = mailSenderService;
             _mapper = mapper;
         }
 
@@ -48,12 +52,13 @@ namespace STS.DAL.DataAccess.Users.Services
         public async Task<Result> CreateUserAsync(User user)
         {
             var userEntity = _mapper.Map<UserEntity>(user);
-            var password = _stringGeneratorService.GeneratePassword();
-            var encryptUserData = _encryptorService.EncryptUserData(userEntity.Email, password.Value);
+            var passwordResult = _stringGeneratorService.GeneratePassword();
+            var encryptUserData = _encryptorService.EncryptUserData(userEntity.Email, passwordResult.Value);
 
             userEntity.Id = Guid.NewGuid();
             userEntity.Password = encryptUserData;
             var responseDb = await _userRepository.CreateAsync(userEntity);
+            _mailSenderService.SendMessageWithPassword(user.Email, passwordResult.Value);
 
             return responseDb.CheckDbResponse(ErrorConstants.UserError.UserNotCreated);
         }
