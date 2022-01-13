@@ -12,7 +12,6 @@ namespace STS.DAL.DataAccess.Questions.Services
         Task<Result<Question>> GetQuestionByIdAsync(Guid id);
         Task<Result<List<Question>>> GetAllQuestionsByDifficultyAsync(int difficulty, Guid themeId);
         Task<Result<List<Question>>> GetAllAsync();
-        Task<Result<Question>> GetQuestionByThemIdAndParametersAsync(Guid themeId);
         Task<Result> CreateQuestionAsync(Question question);
         Task<Result> DeleteQuestionAsync(Guid id);
         Task<Result> UpdateQuestionAsync(Question question);

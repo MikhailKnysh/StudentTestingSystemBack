@@ -52,14 +52,6 @@ namespace STS.Api.Controllers
             return ToApiResult(result);
         }
 
-        [HttpGet("get/{themeid}/parameters")]
-        public async Task<IActionResult> GetQuestionByThemIdAndParametersAsync(Guid themeId)
-        {
-            var result = await _questionService.GetQuestionByThemIdAndParametersAsync(themeId);
-
-            return ToApiResult(result);
-        }
-
         [HttpPost("create")]
         public async Task<IActionResult> CreateQuestionAsync(Question question)
         {

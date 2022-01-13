@@ -17,9 +17,9 @@ namespace STS.DAL.Mapper.Profiles
             CreateMap<QuestionEntity,Question>()
                 .ForMember(dest => dest.Id, opt => opt
                     .MapFrom(src => src.Id))
-                .ForMember(dest => dest.Id_Teacher, opt => opt
+                .ForMember(dest => dest.IdTeacher, opt => opt
                     .MapFrom(src => src.UserId))
-                .ForMember(dest => dest.Id_Theme, opt => opt
+                .ForMember(dest => dest.IdTheme, opt => opt
                     .MapFrom(src => src.ThemeId))
                 .ForMember(dest => dest.Title, opt => opt
                     .MapFrom(src => src.Title))
@@ -45,9 +45,9 @@ namespace STS.DAL.Mapper.Profiles
                 .ForMember(dest => dest.Id, opt => opt
                     .MapFrom(src => src.Id))
                 .ForMember(dest => dest.UserId, opt => opt
-                    .MapFrom(src => src.Id_Teacher))
+                    .MapFrom(src => src.IdTeacher))
                 .ForMember(dest => dest.ThemeId, opt => opt
-                    .MapFrom(src => src.Id_Theme))
+                    .MapFrom(src => src.IdTheme))
                 .ForMember(dest => dest.Title, opt => opt
                     .MapFrom(src => src.Title))
                 .ForMember(dest => dest.Body, opt => opt

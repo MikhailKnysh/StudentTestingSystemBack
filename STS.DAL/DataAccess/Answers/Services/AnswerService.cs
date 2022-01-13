@@ -47,7 +47,7 @@ namespace STS.DAL.DataAccess.Answers.Services
         {
             var foundedEntity = await _answerRepository.FindAsync(a => a.Id == answer.ID);
             foundedEntity.Body = answer.Body;
-            foundedEntity.Id_Question = answer.ID_Question;
+            foundedEntity.Id_Question = answer.IdQuestion;
             foundedEntity.IsCorrect = answer.IsCorrect;
 
             var responseDb = await _answerRepository.UpdateAsync(foundedEntity);

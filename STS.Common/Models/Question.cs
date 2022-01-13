@@ -6,8 +6,8 @@ namespace STS.Common.Models
     public class Question
     {
         public Guid Id { get; set; }
-        public Guid Id_Teacher { get; set; }
-        public Guid Id_Theme { get; set; }
+        public Guid IdTeacher { get; set; }
+        public Guid IdTheme { get; set; }
         public string Title { get; set; }
         public string QuestionBody { get; set; }
         public string ImageLink { get; set; }

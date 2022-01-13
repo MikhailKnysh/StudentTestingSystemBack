@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using AutoMapper;
 using FluentResults;
 using STS.Common.Constans;
@@ -27,7 +28,7 @@ namespace STS.DAL.DataAccess.Questions.Services
 
         public async Task<Result<List<Question>>> GetAllQuestionsByThemeIdAsync(Guid themeId)
         {
-            var questionEntities = await _questionRepository.WhereAsync(q => q.ThemeId == themeId);
+            var questionEntities = await _questionRepository.GetAllQuestionsByThemeIdAsync(themeId);
             var questions = _mapper.Map<List<Question>>(questionEntities);
 
             return questions.CheckCollectionNullOrEmpty(ErrorConstants.CommonErrors.DataNotFound);
@@ -35,7 +36,7 @@ namespace STS.DAL.DataAccess.Questions.Services
 
         public async Task<Result<Question>> GetQuestionByIdAsync(Guid id)
         {
-            var questionEntities = await _questionRepository.FindAsync(q => q.Id == id);
+            var questionEntities = await _questionRepository.GetQuestionByIdAsync(id);
             var questions = _mapper.Map<Question>(questionEntities);
 
             return questions.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
@@ -44,8 +45,7 @@ namespace STS.DAL.DataAccess.Questions.Services
         public async Task<Result<List<Question>>> GetAllQuestionsByDifficultyAsync(int difficulty, Guid themeId)
         {
             var questionEntities = await _questionRepository
-                .WhereAsync(q => q.ThemeId == themeId
-                                 && q.Difficulty == difficulty);
+                .GetAllQuestionsByDifficultyAsync(difficulty, themeId);
             var questions = _mapper.Map<List<Question>>(questionEntities);
 
             return questions.CheckCollectionNullOrEmpty(ErrorConstants.CommonErrors.DataNotFound);
@@ -59,16 +59,17 @@ namespace STS.DAL.DataAccess.Questions.Services
             return questions.CheckCollectionNullOrEmpty(ErrorConstants.CommonErrors.DataNotFound);
         }
 
-        public async Task<Result<Question>> GetQuestionByThemIdAndParametersAsync(Guid themeId)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<Result> CreateQuestionAsync(Question question)
         {
             var questionEntity = _mapper.Map<QuestionEntity>(question);
             questionEntity.Id = Guid.NewGuid();
-            questionEntity.Answers = null;
+            foreach (var questionEntityAnswer in questionEntity.Answers)
+            {
+                questionEntityAnswer.Id = Guid.NewGuid();
+                questionEntityAnswer.Id_Question = questionEntity.Id;
+            }
+
             questionEntity.User = null;
             questionEntity.Theme = null;
 
@@ -89,8 +90,8 @@ namespace STS.DAL.DataAccess.Questions.Services
         {
             var foundedEntity = await _questionRepository.FindAsync(q => q.Id == question.Id);
             foundedEntity.Id = question.Id;
-            foundedEntity.UserId = question.Id_Teacher;
-            foundedEntity.ThemeId = question.Id_Theme;
+            foundedEntity.UserId = question.IdTeacher;
+            foundedEntity.ThemeId = question.IdTheme;
             foundedEntity.Title = question.Title;
             foundedEntity.Body = question.QuestionBody;
             foundedEntity.PathToImage = question.ImageLink;

@@ -4,6 +4,7 @@ using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using STS.Common.Constans;
 
 namespace STS.Common.RootControllers
 {
@@ -29,7 +30,10 @@ namespace STS.Common.RootControllers
             if (result.IsFailed)
             {
                 var apiError = result.ToResult().ToApiError();
-
+                if (apiError.Items.Contains(ErrorConstants.CommonErrors.DataNotFound))
+                {
+                    return StatusCode((int)HttpStatusCode.NoContent, apiError);
+                }
                 _logger.LogError(JsonConvert.SerializeObject(apiError));
 
                 return StatusCode((int)HttpStatusCode.BadRequest, apiError);

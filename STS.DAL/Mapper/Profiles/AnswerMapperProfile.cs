@@ -19,7 +19,7 @@ namespace STS.DAL.Mapper.Profiles
                     .MapFrom(src => src.Id))
                 .ForMember(dest => dest.Body, opt => opt
                     .MapFrom(src => src.Body))
-                .ForMember(dest => dest.ID_Question, opt => opt
+                .ForMember(dest => dest.IdQuestion, opt => opt
                     .MapFrom(src => src.Id_Question))
                 .ForMember(dest => dest.IsCorrect, opt => opt
                     .MapFrom(src => src.IsCorrect));
@@ -33,7 +33,7 @@ namespace STS.DAL.Mapper.Profiles
                 .ForMember(dest => dest.Body, opt => opt
                     .MapFrom(src => src.Body))
                 .ForMember(dest => dest.Id_Question, opt => opt
-                    .MapFrom(src => src.ID_Question))
+                    .MapFrom(src => src.IdQuestion))
                 .ForMember(dest => dest.IsCorrect, opt => opt
                     .MapFrom(src => src.IsCorrect));
         }
