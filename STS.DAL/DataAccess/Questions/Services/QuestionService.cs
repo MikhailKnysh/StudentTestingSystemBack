@@ -115,10 +115,17 @@ namespace STS.DAL.DataAccess.Questions.Services
             return responseDb.CheckDbResponse(ErrorConstants.QuestionError.QuestionNotUpdated);
         }
 
-        public Task<Result<Question>> GetNextQuestionAsync(Guid testId)
+        public async Task<Result<Question>> GetNextQuestionAsync(Question question)
         {
-            // todo сюда добавить поиск вопроса по формуле из диплома
-            return null;
+            Random random = new Random();
+            int quantity = await _questionRepository.GetQuestionsQuantityAsync();
+
+            int toSkip = random.Next(1, quantity);
+
+            var foundedEntity = await _questionRepository.GetNextQuestionAsync(toSkip);
+            var questionModel = _mapper.Map<Question>(foundedEntity);
+
+            return questionModel.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
         }
     }
 }

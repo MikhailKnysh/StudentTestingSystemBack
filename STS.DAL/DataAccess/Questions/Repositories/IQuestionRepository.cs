@@ -15,5 +15,7 @@ namespace STS.DAL.DataAccess.Questions.Repositories
         Task<QuestionEntity> GetQuestionByIdAsync(Guid id);
         
         Task<List<QuestionEntity>> GetAllQuestionsByDifficultyAsync(int difficulty, Guid themeId);
+        Task<int> GetQuestionsQuantityAsync();
+        Task<QuestionEntity> GetNextQuestionAsync(int toSkip);
     }
 }
