@@ -84,10 +84,10 @@ namespace STS.Api.Controllers
             return ToApiResult(result);
         }
 
-        [HttpPost("get/next/{testId}")]
-        public async Task<IActionResult> GetNextQuestion(Guid testId)
+        [HttpPost("get/next")]
+        public async Task<IActionResult> GetNextQuestion(Question question)
         {
-            var result = _questionService.GetNextQuestionAsync(testId);
+            var result = _questionService.GetNextQuestionAsync(question);
 
             return ToApiResult(result);
         }

@@ -61,5 +61,19 @@ namespace STS.DAL.DataAccess.Questions.Repositories
 
             return questions;
         }
+
+        public async Task<int> GetQuestionsQuantityAsync()
+        {
+            var quantity = await _context.Questions.CountAsync();
+
+            return quantity;
+        }
+
+        public async Task<QuestionEntity> GetNextQuestionAsync(int toSkip)
+        {
+            var question = await _context.Questions.Skip(toSkip).Take(1).FirstOrDefaultAsync();
+
+            return question;
+        }
     }
 }
