@@ -1,7 +1,110 @@
-version: '3'
+version: '3.4'
 services:
+
+#  nginx:
+#    build:
+#      context: ./nginx
+#      dockerfile: dockerfile
+#    restart: always
+#    container_name: nginx
+#    ports:
+#      - 80:80
+#  nginx:
+#    image: nginx
+#    container_name: nginx
+#    depends_on:
+#      - dozzle
+#      - sts-api
+#      - prometheus
+#      - seq
+#    restart: always
+#    build:
+#      dockerfile: dockerfile
+#      context: ./nginx
+#    ports:
+#      - "3050:80"
+
+  dozzle:
+    container_name: dozzle
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8080:8080
+
+  sts-front:
+    image: sinerger/sts.front:latest
+    container_name: sts-front
+#    build:
+#      context: ./STS.Front
+#      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - 1444:80
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+  sts-api:
+    build:
+      context: ./STS
+      dockerfile: Dockerfile
+    restart: always
+    container_name: sts-api
+    ports:
+      - 2248:2248
+    environment:
+    - ASPNETCORE_URLS=http://+:2248
+    - ASPNETCORE_ENVIRONMENT=Production
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3010:3000"
+    volumes:
+      - ./Grafana:/var/lib/grafana
+    environment:
+      - 'GF_SMTP_ENABLED=true'
+      - 'GF_SMTP_HOST=smtp.gmail.com:587'
+      - 'GF_SMTP_USER=student.testing.system.server@gmail.com'
+      - 'GF_SMTP_PASSWORD=hkjas*71236hsg^^^7'
+      - 'GF_SMTP_FROM_ADDRESS=student.testing.system.server@gmail.com'
+
+  prometheus:
+    image: bitnami/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./Prometheus/Config:/etc/prometheus/
+      - ./Prometheus/Data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+
+  cadvisor:
+    image: google/cadvisor
+    container_name: cadvisor
+    command:
+      - '-port=8070'
+    ports:
+      - "8070:8070"
+
+  exporter_blackbox:
+    image: bitnami/blackbox-exporter
+    container_name: blackbox
+    ports:
+      - "9115:9115"
+    volumes:
+      - ./Blackbox:/etc/blackbox
+    command:
+      - '--config.file=/etc/blackbox/blackbox.yml'
+        
   seq:
     image: datalust/seq:latest
+    container_name: seq
     ports:
       - "5341:80"
     environment:
@@ -9,13 +112,3 @@ services:
     restart: unless-stopped
     volumes:
       - ./seq-data:/data
-  sts:
-    build:
-      context: C:\Users\user\Documents\Repositories\StudentTestingSystemBack\STS.Api #/STS.Api
-      dockerfile: Dockerfile
-    restart: always
-    ports:
-      - 5000:5000
-    environment:
-      - ASPNETCORE_URLS=http://+:5000
-      - ASPNETCORE_ENVIRONMENT=Production 

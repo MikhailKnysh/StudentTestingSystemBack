@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Prometheus;
 using Serilog;
 using STS.Common.Auth.Extensions;
 using STS.Common.Middlewares;
@@ -78,6 +79,8 @@ namespace STS.Api
 
             app.UseCors(_corsPolicy);
 
+            app.UseMetricServer();
+            
             app.UseHttpsRedirection();
 
             app.UseMiddleware<ErrorHandlerMiddleware>();
