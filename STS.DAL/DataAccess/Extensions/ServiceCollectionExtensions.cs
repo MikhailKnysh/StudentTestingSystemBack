@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using STS.Common.Cryptography.Extensions;
 using STS.Common.Generators.Extensions;
 using STS.DAL.DataAccess.Answers.Extensions;
+using STS.DAL.DataAccess.AvailableTests.Extensions;
 using STS.DAL.DataAccess.Groups.Extensions;
 using STS.DAL.DataAccess.Questions.Extensions;
 using STS.DAL.DataAccess.Sessions.Extensions;
@@ -34,6 +35,7 @@ namespace STS.DAL.DataAccess.Extensions
             services.AddQuestion();
             services.AddTest();
             services.AddStudentAnswer();
+            services.AddAvailableTest();
         }
     }
 }

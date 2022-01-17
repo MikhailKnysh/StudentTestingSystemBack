@@ -15,6 +15,7 @@ namespace STS.DAL.EntityContext.Context
         public DbSet<AnswerEntity> Answers { get; set; }
         public DbSet<TestEntity> Tests { get; set; }
         public DbSet<StudentAnswerEntity> StudentAnswers { get; set; }
+        public DbSet<AvailableTestEntity> AvailableTests { get; set; }
 
         public ApplicationContext()
         {
@@ -36,6 +37,17 @@ namespace STS.DAL.EntityContext.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AvailableTestEntity>(entity =>
+            {
+                entity.HasOne(availableTestEntity => availableTestEntity.Student)
+                    .WithMany(userEntity => userEntity.AvailableTests)
+                    .HasForeignKey(availableTestEntity => availableTestEntity.StudentId);
+
+                entity.HasOne(availableTestEntity => availableTestEntity.Theme)
+                    .WithMany(themeEntity => themeEntity.AvailableTests)
+                    .HasForeignKey(availableTestEntity => availableTestEntity.ThemeId);
+            });
+            
             modelBuilder.Entity<ThemeEntity>(entity =>
             {
                 entity.HasOne(themeEntity => themeEntity.Subject)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using STS.Common.Models;
@@ -20,10 +21,34 @@ namespace STS.Api.Controllers
             _testService = testService;
         }
 
+        [HttpPost("set/availableTest")]
+        public async Task<IActionResult> SetAvailableTestAsync(AvailableTestForStudents availableTestForStudents)
+        {
+            var result = await _testService.SetAvailableTestAsync(availableTestForStudents);
+
+            return ToApiResult(result);
+        }
+        
+        [HttpPost("get/availabletest/{userId}")]
+        public async Task<IActionResult> GetAvailableTestAsync(Guid userId)
+        {
+            var result = await _testService.GetAvailableTestAsync(userId);
+
+            return ToApiResult(result);
+        }
+        
         [HttpPost("get/result/{userId}/{themeId}")]
-        public async Task<IActionResult> GetResult(Guid userId, Guid themeId)
+        public async Task<IActionResult> GetResultAsync(Guid userId, Guid themeId)
         {
             var result = await _testService.CreateTestAsync(userId, themeId);
+
+            return ToApiResult(result);
+        }
+
+        [HttpGet("get/all/themeId/{themeId}")]
+        public async Task<IActionResult> GetAllTestByThemeIdAsync(Guid themeId)
+        {
+            var result = await _testService.GetAllTestByThemeIdAsync(themeId);
 
             return ToApiResult(result);
         }

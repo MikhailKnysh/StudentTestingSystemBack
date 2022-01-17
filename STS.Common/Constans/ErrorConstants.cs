@@ -66,6 +66,12 @@ namespace STS.Common.Constans
             public const string TestNotDeleted = "Test not been deleted.";
         }
 
+        public static class AvailableTestError
+        {
+            public const string AvailableTestNotCreated = "Available Test not been created.";
+            public const string AvailableTestNotSet = "Available test not set.";
+        }
+
         public static class StudentAnswerError
         {
             public const string StudentAnswerNotCreated = "StudentAnswer not been created.";

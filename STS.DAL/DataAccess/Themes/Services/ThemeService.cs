@@ -8,6 +8,7 @@ using STS.DAL.EntityContext.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper.Internal;
 
 namespace STS.DAL.DataAccess.Themes.Services
 {
@@ -63,6 +64,15 @@ namespace STS.DAL.DataAccess.Themes.Services
             var responseDb = await _themeRepository.DeleteAsync(foundedEntity);
 
             return responseDb.CheckDbResponse(ErrorConstants.ThemeErrors.ThemeNotDeleted);
+        }
+
+        public async Task<Result<Theme>> GetByIdAsync(Guid themeId)
+        {
+            var themeEntity = await _themeRepository.FindAsync(t => t.Id == themeId);
+
+            var theme = _mapper.Map<Theme>(themeEntity);
+
+            return theme.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
         }
     }
 }

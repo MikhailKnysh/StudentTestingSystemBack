@@ -58,7 +58,7 @@ namespace STS.DAL.DataAccess.Users.Services
             userEntity.Id = Guid.NewGuid();
             userEntity.Password = encryptUserData;
             var responseDb = await _userRepository.CreateAsync(userEntity);
-            _mailSenderService.SendMessageWithPassword(user.Email, passwordResult.Value);
+            _mailSenderService.SendMessageWithPasswordAsync(user.Email, passwordResult.Value);
 
             return responseDb.CheckDbResponse(ErrorConstants.UserError.UserNotCreated);
         }
@@ -105,7 +105,8 @@ namespace STS.DAL.DataAccess.Users.Services
         public async Task<Result> ChangePasswordAsync(ChangePasswordModel changePasswordModel)
         {
             var result = Result.Fail(ErrorConstants.SessionErrors.InvalidAuthData);
-            var encryptUserData = _encryptorService.EncryptUserData(changePasswordModel.Email, changePasswordModel.OldPassword);
+            var encryptUserData =
+                _encryptorService.EncryptUserData(changePasswordModel.Email, changePasswordModel.OldPassword);
             var foundedUser = await _userRepository
                 .FindAsync(u => u.Email == changePasswordModel.Email && u.Password == encryptUserData);
             if (foundedUser is not null)
@@ -119,6 +120,14 @@ namespace STS.DAL.DataAccess.Users.Services
             }
 
             return result;
+        }
+
+        public async Task<Result<List<User>>> GetStudentsByIdsAsync(List<Guid> students)
+        {
+            var usersEntities = await _userRepository.GetStudentsByIdsAsync(students);
+            var users = _mapper.Map<List<User>>(usersEntities);
+
+            return users.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
         }
     }
 }

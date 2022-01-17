@@ -16,6 +16,6 @@ namespace STS.DAL.DataAccess.Users.Services
         Task<Result<List<User>>> GetAllUsersByGroupIdAsync(Guid groupId);
         Task<Result<User>> GetUserByIdAsync(Guid id);
         Task<Result> ChangePasswordAsync(ChangePasswordModel changePasswordModel);
-
+        Task<Result<List<User>>> GetStudentsByIdsAsync(List<Guid> students);
     }
 }

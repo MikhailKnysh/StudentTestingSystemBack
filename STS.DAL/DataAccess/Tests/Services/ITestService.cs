@@ -14,5 +14,8 @@ namespace STS.DAL.DataAccess.Tests.Services
         Task<Result<Test>> GetTestByIdAsync(Guid id);
         Task<Result> DeleteAsync(Guid id);
         Task<Result<List<Test>>> GetAllTestsByGroupAsync(Guid groupId);
+        Task<Result<List<Test>>> GetAllTestByThemeIdAsync(Guid themeId);
+        Task<Result<List<AvailableTest>>> SetAvailableTestAsync(AvailableTestForStudents availableTestForStudents);
+        Task<Result<List<AvailableTest>>> GetAvailableTestAsync(Guid userId);
     }
 }

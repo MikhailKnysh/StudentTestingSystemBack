@@ -17,9 +17,11 @@ namespace STS.DAL.EntityContext.Entitieas
 
         public ICollection<QuestionEntity> Questions { get; set; }
         public ICollection<TestEntity> Tests { get; set; }
+        public ICollection<AvailableTestEntity> AvailableTests { get; set; }
 
         public UserEntity()
         {
+            AvailableTests = new HashSet<AvailableTestEntity>();
             Groups = new HashSet<GroupEntity>();
             Questions = new HashSet<QuestionEntity>();
             Tests = new HashSet<TestEntity>();

@@ -12,5 +12,6 @@ namespace STS.DAL.DataAccess.Themes.Services
         Task<Result<List<Theme>>> GetAllBySubjectId(Guid id);
         Task<Result> UpdateAsync(Theme theme);
         Task<Result> DeleteAsync(Guid id);
+        Task<Result<Theme>> GetByIdAsync(Guid themeId);
     }
 }

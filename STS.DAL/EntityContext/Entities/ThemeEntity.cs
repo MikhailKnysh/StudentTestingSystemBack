@@ -13,9 +13,12 @@ namespace STS.DAL.EntityContext.Entities
         public SubjectEntity Subject { get; set; }
         public ICollection<QuestionEntity> Questions { get; set; }
 
+        public ICollection<AvailableTestEntity> AvailableTests { get; set; }
+
         public ThemeEntity()
         {
             Questions = new HashSet<QuestionEntity>();
+            AvailableTests = new HashSet<AvailableTestEntity>();
         }
     }
 }

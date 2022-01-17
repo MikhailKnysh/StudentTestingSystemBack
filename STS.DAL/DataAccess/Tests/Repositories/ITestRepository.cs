@@ -12,5 +12,6 @@ namespace STS.DAL.DataAccess.Tests.Repositories
         Task<List<TestEntity>> GetAllTestsByGroupAsync(Guid groupId);
         Task<List<TestEntity>> GetAllTestsByUserIdAsync(Guid userId);
         Task<TestEntity> GetTestByIdAsync(Guid id);
+        Task<List<TestEntity>> GetAllTestByThemeIdAsync(Guid themeId);
     }
 }

@@ -21,8 +21,9 @@ namespace STS.DAL.DataAccess.Tests.Repositories
             var tests = await _context.Tests
                 .Include(testEntity => testEntity.Student)
                 .ThenInclude(userEntity => userEntity.Groups)
-                .Include(e=>e.Answers)
-                .Where(testEntity => testEntity.Student.Groups.FirstOrDefault(groupEntity => groupEntity.Id == groupId) != null)
+                .Include(e => e.Answers)
+                .Where(testEntity =>
+                    testEntity.Student.Groups.FirstOrDefault(groupEntity => groupEntity.Id == groupId) != null)
                 .ToListAsync();
 
             return tests;
@@ -33,8 +34,8 @@ namespace STS.DAL.DataAccess.Tests.Repositories
             var tests = await _context.Tests
                 .Include(testEntity => testEntity.Student)
                 .ThenInclude(userEntity => userEntity.Groups)
-                .Include(e=>e.Answers)
-                .Where(testEntity => testEntity.UserId==userId)
+                .Include(e => e.Answers)
+                .Where(testEntity => testEntity.UserId == userId)
                 .ToListAsync();
 
             return tests;
@@ -47,6 +48,18 @@ namespace STS.DAL.DataAccess.Tests.Repositories
                 .ThenInclude(userEntity => userEntity.Groups)
                 .Include(e => e.Answers)
                 .FirstOrDefaultAsync(testEntity => testEntity.Id == id);
+
+            return tests;
+        }
+
+        public async Task<List<TestEntity>> GetAllTestByThemeIdAsync(Guid themeId)
+        {
+            var tests = await _context.Tests
+                .Include(testEntity => testEntity.Student)
+                .ThenInclude(userEntity => userEntity.Groups)
+                .Include(e => e.Answers)
+                .Where(testEntity => testEntity.ThemeId == themeId)
+                .ToListAsync();
 
             return tests;
         }
