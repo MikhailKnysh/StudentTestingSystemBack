@@ -29,12 +29,12 @@ namespace STS.DAL.EntityContext.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(
-                    "Server=tcp:stsapplicationsqlserver.database.windows.net,1433;Initial Catalog=STS;Persist Security Info=False;User ID=stsapplicationsqlserver-admin;Password=360OYYD32LSFP13G$;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
-                );
                 // optionsBuilder.UseSqlServer(
-                //     "Server=localhost;Initial Catalog=STS;Trusted_Connection=True;"
+                //     "Server=tcp:stsapplicationsqlserver.database.windows.net,1433;Initial Catalog=STS;Persist Security Info=False;User ID=stsapplicationsqlserver-admin;Password=360OYYD32LSFP13G$;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
                 // );
+                optionsBuilder.UseSqlServer(
+                    "Server=localhost;Initial Catalog=STS;Trusted_Connection=True;"
+                );
             }
         }
 
@@ -64,17 +64,18 @@ namespace STS.DAL.EntityContext.Context
                     .WithMany(groupEntity => groupEntity.Users);
             });
 
-            // modelBuilder.Entity<QuestionEntity>(entity =>
-            // {
-            //     entity.HasOne(questionEntity => questionEntity.User)
-            //         .WithMany(userEntity => userEntity.Questions)
-            //         .HasForeignKey(questionEntity => questionEntity.UserId);
-            //
-            //     entity.HasOne(questionEntity => questionEntity.Theme)
-            //         .WithMany(themeEntity => themeEntity.Questions)
-            //         .HasForeignKey(questionEntity => questionEntity.ThemeId);
-            //     entity.HasMany(questionEntity => questionEntity.Answers);
-            // });
+            modelBuilder.Entity<QuestionEntity>(entity =>
+            {
+                entity.HasOne(questionEntity => questionEntity.User)
+                    .WithMany(userEntity => userEntity.Questions)
+                    .HasForeignKey(questionEntity => questionEntity.UserId);
+            
+                entity.HasOne(questionEntity => questionEntity.Theme)
+                    .WithMany(themeEntity => themeEntity.Questions)
+                    .HasForeignKey(questionEntity => questionEntity.ThemeId);
+                entity.HasMany(questionEntity => questionEntity.Answers);
+            });
+            
             modelBuilder.Entity<TestEntity>(entity =>
             {
                 entity.HasOne(testEntity => testEntity.Theme);

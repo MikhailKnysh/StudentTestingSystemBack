@@ -132,9 +132,9 @@ namespace STS.DAL.DataAccess.Questions.Services
             // int toSkip = random.Next(1, quantity);
             //
             // var foundedEntity = await _questionRepository.GetNextQuestionAsync(toSkip);
-            // var questionModel = _mapper.Map<Question>(foundedEntity);
+            // var questionModel1 = _mapper.Map<Question>(foundedEntity);
             //
-            // return questionModel.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
+            // return questionModel1.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
 
             var questions = await _questionRepository.GetAllQuestionsByThemeIdAsync(themeId);
             var studentAnswerResult = await _studentAnswerService.GetAllByStudentIdAsync(studentId);
@@ -143,14 +143,14 @@ namespace STS.DAL.DataAccess.Questions.Services
                 var questionsIdsWithAnswers = studentAnswerResult.Value.Select(x => x.QuestionId);
                 var question = questions.FirstOrDefault(x => !questionsIdsWithAnswers.Contains(x.Id));
                 var questionModel = _mapper.Map<Question>(question);
-
+            
                 return questionModel.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
             }
             else
             {
                 var question = questions.FirstOrDefault();
                 var questionModel = _mapper.Map<Question>(question);
-
+            
                 return questionModel.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
             }
         }
