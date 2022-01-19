@@ -7,7 +7,7 @@ using STS.Common.Constans;
 using STS.Common.FluentResult.Extensions;
 using STS.Common.Models;
 using STS.DAL.DataAccess.StudentAnswers.Repositories;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.StudentAnswers.Services
 {
@@ -40,7 +40,7 @@ namespace STS.DAL.DataAccess.StudentAnswers.Services
             return result.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
         }
 
-        
+
         public async Task<Result<List<StudentAnswerEntity>>> GetAllByStudentIdAsync(Guid studentId)
         {
             var result = await _studentAnswerRepository.WhereAsync(e => e.StudentId == studentId);

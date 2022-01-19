@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using STS.DAL.DataAccess.BaseRepository;
-using STS.DAL.EntityContext.Context;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.DBContext;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.Answers.Repositories
 {
@@ -18,7 +18,7 @@ namespace STS.DAL.DataAccess.Answers.Repositories
         public async Task<List<AnswerEntity>> GetAllByQuestionID(Guid questionId)
         {
             var answerEnitities = await _context.Answers
-                .Where(e => e.Id_Question == questionId)
+                .Where(e => e.IdQuestion == questionId)
                 .ToListAsync();
 
             return answerEnitities;

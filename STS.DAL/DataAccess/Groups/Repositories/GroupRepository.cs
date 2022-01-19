@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using STS.DAL.DataAccess.BaseRepository;
-using STS.DAL.EntityContext.Context;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.DBContext;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.Groups.Repositories
 {
@@ -20,7 +20,7 @@ namespace STS.DAL.DataAccess.Groups.Repositories
         public async Task<List<GroupEntity>> GetAllAsync()
         {
             var groups = await _context.Groups
-                .Include(e => e.Users)
+                .Include(e => e.GroupEntityUserEntities)
                 .ToListAsync();
 
             return groups;
@@ -35,7 +35,12 @@ namespace STS.DAL.DataAccess.Groups.Repositories
                 .ToListAsync();
             foreach (var user in users)
             {
-                groupEntity.Users.Add(user);
+                var groupEntityUserEntity = new GroupEntityUserEntity()
+                {
+                    GroupsId = groupEntity.Id,
+                    UsersId = user.Id
+                };
+                groupEntity.GroupEntityUserEntities.Add(groupEntityUserEntity);
             }
 
             var result = await _context.SaveChangesAsync();

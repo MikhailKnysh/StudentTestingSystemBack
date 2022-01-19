@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using STS.DAL.DataAccess.Themes.Repositories;
 using STS.DAL.DataAccess.Themes.Services;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.Themes.Extension
 {

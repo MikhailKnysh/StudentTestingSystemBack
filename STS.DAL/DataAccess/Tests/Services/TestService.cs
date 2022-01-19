@@ -11,7 +11,7 @@ using STS.DAL.DataAccess.AvailableTests.Sevices;
 using STS.DAL.DataAccess.Tests.Repositories;
 using STS.DAL.DataAccess.Themes.Services;
 using STS.DAL.DataAccess.Users.Services;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.Tests.Services
 {

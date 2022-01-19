@@ -1,5 +1,5 @@
 ﻿using STS.DAL.DataAccess.BaseRepository;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.StudentAnswers.Repositories
 {

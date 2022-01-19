@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using STS.DAL.EntityContext.Entitieas;
 
-namespace STS.DAL.EntityContext.Entities
+#nullable disable
+
+namespace STS.DAL.Entities
 {
-    public class TestEntity
+    public partial class TestEntity
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
@@ -15,13 +16,9 @@ namespace STS.DAL.EntityContext.Entities
         public int TimePreparation { get; set; }
         public int CountOfHelpChecks { get; set; }
         public bool IsDone { get; set; }
-        public UserEntity Student { get; set; }
-        public ThemeEntity Theme { get; set; }
-        public ICollection<StudentAnswerEntity> Answers { get; set; }
+        public Guid? StudentId { get; set; }
 
-        public TestEntity()
-        {
-            Answers = new HashSet<StudentAnswerEntity>();
-        }
+        public virtual UserEntity Student { get; set; }
+        public virtual ThemeEntity ThemeEntity { get; set; }
     }
 }

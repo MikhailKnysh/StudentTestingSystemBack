@@ -7,7 +7,7 @@ using STS.Common.Constans;
 using STS.Common.FluentResult.Extensions;
 using STS.Common.Models;
 using STS.DAL.DataAccess.AvailableTests.Repositories;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.AvailableTests.Sevices
 {
@@ -30,7 +30,7 @@ namespace STS.DAL.DataAccess.AvailableTests.Sevices
             var entity = _mapper.Map<AvailableTestEntity>(availableTests);
             entity.Student = null;
             entity.Id = Guid.NewGuid();
-            entity.Theme = null;
+            entity.ThemeEntity = null;
             var responseDb = await _availableTestRepository.CreateAsync(entity);
 
             return responseDb.CheckDbResponse(ErrorConstants.AvailableTestError.AvailableTestNotCreated);

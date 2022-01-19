@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.AccessControl;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentResults;
@@ -8,7 +7,7 @@ using STS.Common.Constans;
 using STS.Common.FluentResult.Extensions;
 using STS.Common.Models;
 using STS.DAL.DataAccess.Groups.Repositories;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.Groups.Services
 {
@@ -30,7 +29,6 @@ namespace STS.DAL.DataAccess.Groups.Services
         {
             var groupEntity = _mapper.Map<GroupEntity>(group);
             groupEntity.Id = Guid.NewGuid();
-            groupEntity.Users = null;
             var responseDb = await _groupRepository.CreateAsync(groupEntity);
 
             return responseDb.CheckDbResponse(ErrorConstants.GroupErrors.GroupNotCreated);
@@ -55,7 +53,6 @@ namespace STS.DAL.DataAccess.Groups.Services
             if (foundedGroupEntity is not null)
             {
                 foundedGroupEntity.Name = group.Title;
-                foundedGroupEntity.Users = null;
                 responseDb = await _groupRepository.UpdateAsync(foundedGroupEntity);
             }
 

@@ -1,5 +1,4 @@
-﻿using STS.Common.Models;
-using System;
+﻿using System;
 
 namespace Common.Models
 {

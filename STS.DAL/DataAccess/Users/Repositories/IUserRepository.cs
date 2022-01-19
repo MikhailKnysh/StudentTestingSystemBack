@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using STS.DAL.DataAccess.BaseRepository;
-using STS.DAL.EntityContext.Entitieas;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.Users.Repositories
 {

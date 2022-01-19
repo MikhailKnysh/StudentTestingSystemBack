@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using STS.Common.Models;
 using STS.DAL.DataAccess.BaseRepository;
-using STS.DAL.EntityContext.Context;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.DBContext;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.Tests.Repositories
 {
@@ -20,10 +19,10 @@ namespace STS.DAL.DataAccess.Tests.Repositories
         {
             var tests = await _context.Tests
                 .Include(testEntity => testEntity.Student)
-                .ThenInclude(userEntity => userEntity.Groups)
-                .Include(e => e.Answers)
+                .ThenInclude(userEntity => userEntity.GroupEntityUserEntities)
                 .Where(testEntity =>
-                    testEntity.Student.Groups.FirstOrDefault(groupEntity => groupEntity.Id == groupId) != null)
+                    testEntity.Student.GroupEntityUserEntities.FirstOrDefault(groupEntity =>
+                        groupEntity.GroupsId == groupId) != null)
                 .ToListAsync();
 
             return tests;
@@ -33,8 +32,7 @@ namespace STS.DAL.DataAccess.Tests.Repositories
         {
             var tests = await _context.Tests
                 .Include(testEntity => testEntity.Student)
-                .ThenInclude(userEntity => userEntity.Groups)
-                .Include(e => e.Answers)
+                .ThenInclude(userEntity => userEntity.GroupEntityUserEntities)
                 .Where(testEntity => testEntity.UserId == userId)
                 .ToListAsync();
 
@@ -45,8 +43,7 @@ namespace STS.DAL.DataAccess.Tests.Repositories
         {
             var tests = await _context.Tests
                 .Include(testEntity => testEntity.Student)
-                .ThenInclude(userEntity => userEntity.Groups)
-                .Include(e => e.Answers)
+                .ThenInclude(userEntity => userEntity.GroupEntityUserEntities)
                 .FirstOrDefaultAsync(testEntity => testEntity.Id == id);
 
             return tests;
@@ -56,8 +53,7 @@ namespace STS.DAL.DataAccess.Tests.Repositories
         {
             var tests = await _context.Tests
                 .Include(testEntity => testEntity.Student)
-                .ThenInclude(userEntity => userEntity.Groups)
-                .Include(e => e.Answers)
+                .ThenInclude(userEntity => userEntity.GroupEntityUserEntities)
                 .Where(testEntity => testEntity.ThemeId == themeId)
                 .ToListAsync();
 

@@ -12,7 +12,7 @@ using STS.Common.Generators.Services;
 using STS.Common.Models;
 using STS.Common.SMTP.Service;
 using STS.DAL.DataAccess.Users.Repositories;
-using STS.DAL.EntityContext.Entitieas;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.Users.Services
 {
@@ -88,7 +88,8 @@ namespace STS.DAL.DataAccess.Users.Services
 
         public async Task<Result<List<User>>> GetAllUsersByGroupIdAsync(Guid groupId)
         {
-            var usersEntities = await _userRepository.WhereAsync(expression: u => u.Groups.Any(g => g.Id == groupId));
+            var usersEntities = await _userRepository
+                .WhereAsync(expression: u => u.GroupEntityUserEntities.Any(g => g.GroupsId == groupId));
             var users = _mapper.Map<List<User>>(usersEntities);
 
             return users.CheckCollectionNullOrEmpty(ErrorConstants.CommonErrors.DataNotFound);

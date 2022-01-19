@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using STS.DAL.DataAccess.BaseRepository;
-using STS.DAL.EntityContext.Context;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.DBContext;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.AvailableTests.Repositories
 {
@@ -21,7 +21,7 @@ namespace STS.DAL.DataAccess.AvailableTests.Repositories
         {
             var entities = await _context.AvailableTests
                 .Include(e => e.Student)
-                .Include(e => e.Theme)
+                .Include(e => e.ThemeEntity)
                 .Where(e => e.StudentId == userId)
                 .ToListAsync();
 

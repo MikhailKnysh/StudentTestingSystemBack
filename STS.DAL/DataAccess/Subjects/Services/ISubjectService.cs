@@ -1,11 +1,10 @@
-﻿using STS.Common.Models;
-using FluentResults;
-using System.Threading.Tasks;
-using System;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using FluentResults;
+using STS.Common.Models;
 
-namespace STS.DAL.Interfaces
+namespace STS.DAL.DataAccess.Subjects.Services
 {
     public interface ISubjectService
     {

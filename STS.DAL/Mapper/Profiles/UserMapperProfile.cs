@@ -2,7 +2,7 @@
 using AutoMapper;
 using STS.Common.Auth.Models;
 using STS.Common.Models;
-using STS.DAL.EntityContext.Entitieas;
+using STS.DAL.Entities;
 
 namespace STS.DAL.Mapper.Profiles
 {
@@ -29,7 +29,7 @@ namespace STS.DAL.Mapper.Profiles
                 .ForMember(dest => dest.Role, opt => opt
                     .MapFrom(src => src.Role))
                 .ForMember(dest => dest.GroupIds, opt => opt
-                    .MapFrom(src => src.Groups.Select(g => g.Id)));
+                    .MapFrom(src => src.GroupEntityUserEntities.Select(g => g.GroupsId)));
         }
 
         private void CreateMapUserToUserEntity()

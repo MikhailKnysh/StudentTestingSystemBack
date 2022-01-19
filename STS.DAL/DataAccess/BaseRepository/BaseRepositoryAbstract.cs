@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using STS.DAL.EntityContext.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using STS.DAL.DBContext;
 
 namespace STS.DAL.DataAccess.BaseRepository
 {

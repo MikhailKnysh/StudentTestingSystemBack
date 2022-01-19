@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-
-namespace STS.Common.Constans
+﻿namespace STS.Common.Constans
 {
     public static class ErrorConstants
     {

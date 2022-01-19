@@ -1,7 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using STS.Common.Models;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.Entities;
 
 namespace STS.DAL.Mapper.Profiles
 {
@@ -21,8 +21,8 @@ namespace STS.DAL.Mapper.Profiles
                     .MapFrom(src => src.QuestionId))
                 .ForMember(dest => dest.AnswerId, opt => opt
                     .MapFrom(src => src.AnswerId))
-                .ForMember(dest => dest.StudentId, opt => opt
-                    .MapFrom(src => src.StudentId))
+                // .ForMember(dest => dest.StudentId, opt => opt
+                //     .MapFrom(src => src.StudentId))// todo: fix
                 .ForMember(dest => dest.AnswerDuration, opt => opt
                     .MapFrom(src => src.TimeDuration));
         }

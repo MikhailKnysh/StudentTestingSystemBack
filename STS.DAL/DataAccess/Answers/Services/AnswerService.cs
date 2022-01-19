@@ -7,7 +7,7 @@ using STS.Common.Constans;
 using STS.Common.FluentResult.Extensions;
 using STS.Common.Models;
 using STS.DAL.DataAccess.Answers.Repositories;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.Answers.Services
 {
@@ -47,7 +47,7 @@ namespace STS.DAL.DataAccess.Answers.Services
         {
             var foundedEntity = await _answerRepository.FindAsync(a => a.Id == answer.ID);
             foundedEntity.Body = answer.Body;
-            foundedEntity.Id_Question = answer.IdQuestion;
+            foundedEntity.IdQuestion = answer.IdQuestion;
             foundedEntity.IsCorrect = answer.IsCorrect;
 
             var responseDb = await _answerRepository.UpdateAsync(foundedEntity);

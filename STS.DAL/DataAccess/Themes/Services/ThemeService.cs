@@ -4,11 +4,10 @@ using FluentResults;
 using STS.Common.Constans;
 using STS.Common.FluentResult.Extensions;
 using STS.DAL.DataAccess.Themes.Repositories;
-using STS.DAL.EntityContext.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper.Internal;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.Themes.Services
 {
@@ -30,7 +29,7 @@ namespace STS.DAL.DataAccess.Themes.Services
         {
             var themeEntity = _mapper.Map<ThemeEntity>(theme);
             themeEntity.Id = Guid.NewGuid();
-            themeEntity.Subject = null;
+            themeEntity.SubjectEntity = null;
 
             var responseDb = await _themeRepository.CreateAsync(themeEntity);
 
@@ -50,7 +49,7 @@ namespace STS.DAL.DataAccess.Themes.Services
             var foundedEntity = await _themeRepository.FindAsync(s => s.Id == theme.Id);
             foundedEntity.Title = theme.Title;
             foundedEntity.SubjectId = theme.SubjectId;
-            foundedEntity.Subject = null;
+            foundedEntity.SubjectEntity = null;
 
             var responseDb = await _themeRepository.UpdateAsync(foundedEntity);
 

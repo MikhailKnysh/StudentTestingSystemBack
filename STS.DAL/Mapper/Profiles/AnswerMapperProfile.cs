@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using STS.Common.Models;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.Entities;
 
 namespace STS.DAL.Mapper.Profiles
 {
@@ -20,7 +20,7 @@ namespace STS.DAL.Mapper.Profiles
                 .ForMember(dest => dest.Body, opt => opt
                     .MapFrom(src => src.Body))
                 .ForMember(dest => dest.IdQuestion, opt => opt
-                    .MapFrom(src => src.Id_Question))
+                    .MapFrom(src => src.IdQuestion))
                 .ForMember(dest => dest.IsCorrect, opt => opt
                     .MapFrom(src => src.IsCorrect));
         }
@@ -32,7 +32,7 @@ namespace STS.DAL.Mapper.Profiles
                     .MapFrom(src => src.ID))
                 .ForMember(dest => dest.Body, opt => opt
                     .MapFrom(src => src.Body))
-                .ForMember(dest => dest.Id_Question, opt => opt
+                .ForMember(dest => dest.IdQuestion, opt => opt
                     .MapFrom(src => src.IdQuestion))
                 .ForMember(dest => dest.IsCorrect, opt => opt
                     .MapFrom(src => src.IsCorrect));

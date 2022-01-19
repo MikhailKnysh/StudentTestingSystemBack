@@ -1,15 +1,13 @@
 ﻿using FluentResults;
 using STS.DAL.DataAccess.Subjects.Repositories;
-using STS.DAL.EntityContext.Entitieas;
-using STS.DAL.Interfaces;
 using System.Threading.Tasks;
 using AutoMapper;
 using System;
 using STS.Common.Constans;
 using STS.Common.FluentResult.Extensions;
 using STS.Common.Models;
-using System.Linq;
 using System.Collections.Generic;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.Subjects.Services
 {

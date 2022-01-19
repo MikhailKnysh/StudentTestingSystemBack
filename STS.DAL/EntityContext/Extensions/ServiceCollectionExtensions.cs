@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using STS.DAL.EntityContext.Context;
+using STS.DAL.DBContext;
 
 namespace STS.DAL.EntityContext.Extensions
 {

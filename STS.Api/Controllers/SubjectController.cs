@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using STS.DAL.Interfaces;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using STS.Common.Models;
@@ -7,6 +6,7 @@ using STS.Common.RootControllers;
 using System;
 using Microsoft.AspNetCore.Authorization;
 using STS.Common.Constans;
+using STS.DAL.DataAccess.Subjects.Services;
 
 namespace STS.Api.Controllers
 {

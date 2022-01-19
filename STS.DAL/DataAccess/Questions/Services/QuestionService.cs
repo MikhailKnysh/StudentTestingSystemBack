@@ -9,9 +9,8 @@ using STS.Common.FluentResult.Extensions;
 using STS.Common.Models;
 using STS.DAL.DataAccess.AvailableTests.Sevices;
 using STS.DAL.DataAccess.Questions.Repositories;
-using STS.DAL.DataAccess.StudentAnswers.Repositories;
 using STS.DAL.DataAccess.StudentAnswers.Services;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.Questions.Services
 {
@@ -76,11 +75,11 @@ namespace STS.DAL.DataAccess.Questions.Services
             foreach (var questionEntityAnswer in questionEntity.Answers)
             {
                 questionEntityAnswer.Id = Guid.NewGuid();
-                questionEntityAnswer.Id_Question = questionEntity.Id;
+                questionEntityAnswer.IdQuestion = questionEntity.Id;
             }
 
-            questionEntity.User = null;
-            questionEntity.Theme = null;
+            questionEntity.UserEntity = null;
+            questionEntity.ThemeEntity = null;
 
             var responseDb = await _questionRepository.CreateAsync(questionEntity);
 

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using STS.DAL.DataAccess.BaseRepository;
-using STS.DAL.EntityContext.Context;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.DBContext;
+using STS.DAL.Entities;
 
 namespace STS.DAL.DataAccess.Questions.Repositories
 {
@@ -18,8 +18,8 @@ namespace STS.DAL.DataAccess.Questions.Repositories
         public async Task<List<QuestionEntity>> GetAll()
         {
             var questions = await _context.Questions
-                // .Include(e=>e.Answers)
-                .Include(e => e.Theme)
+                .Include(e=>e.Answers)
+                .Include(e => e.ThemeEntity)
                 .ToListAsync();
 
             return questions;
@@ -29,8 +29,8 @@ namespace STS.DAL.DataAccess.Questions.Repositories
         {
             var a = await _context.Questions.ToListAsync();
             var questions = await _context.Questions
-                // .Include(e => e.Answers)
-                // .Include(e => e.Theme)
+                .Include(e => e.Answers)
+                .Include(e => e.ThemeEntity)
                 .Where(e => e.ThemeId == themeId)
                 .ToListAsync();
 
@@ -41,7 +41,7 @@ namespace STS.DAL.DataAccess.Questions.Repositories
         {
             var question = await _context.Questions
                 .Include(e => e.Answers)
-                .Include(e => e.Theme)
+                .Include(e => e.ThemeEntity)
                 .Where(e => e.Id == id)
                 .FirstOrDefaultAsync();
 
@@ -52,7 +52,7 @@ namespace STS.DAL.DataAccess.Questions.Repositories
         {
             var questions = await _context.Questions
                 .Include(e => e.Answers)
-                .Include(e => e.Theme)
+                .Include(e => e.ThemeEntity)
                 .Where(q => q.ThemeId == themeId && q.Difficulty == difficulty)
                 .ToListAsync();
 

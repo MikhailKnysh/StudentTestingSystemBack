@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using STS.Common.Models;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.Entities;
 
 namespace STS.DAL.Mapper.Profiles
 {

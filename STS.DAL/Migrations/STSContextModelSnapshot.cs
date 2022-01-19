@@ -4,109 +4,54 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using STS.DAL.EntityContext.Context;
+using STS.DAL.DBContext;
 
 namespace STS.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    partial class STSContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("GroupEntityUserEntity", b =>
-                {
-                    b.Property<Guid>("GroupsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UsersId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("GroupsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("GroupEntityUserEntity");
-                });
-
-            modelBuilder.Entity("STS.DAL.EntityContext.Entitieas.SubjectEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.Answer", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Subjects");
-                });
-
-            modelBuilder.Entity("STS.DAL.EntityContext.Entitieas.UserEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.AnswerEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Body")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Id_Question")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<Guid>("IdQuestion")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id_Question");
 
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("QuestionEntityId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("QuestionEntityId");
+                    b.HasIndex(new[] { "IdQuestion" }, "IX_Answers_Id_Question");
 
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.AvailableTestEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.AvailableTest", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("bit");
+                    b.Property<bool?>("IsAvailable")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("(CONVERT([bit],(1)))");
 
                     b.Property<Guid>("StudentId")
                         .HasColumnType("uniqueidentifier");
@@ -116,17 +61,16 @@ namespace STS.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex(new[] { "StudentId" }, "IX_AvailableTests_StudentId");
 
-                    b.HasIndex("ThemeId");
+                    b.HasIndex(new[] { "ThemeId" }, "IX_AvailableTests_ThemeId");
 
                     b.ToTable("AvailableTests");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.GroupEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.Group", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -137,10 +81,24 @@ namespace STS.DAL.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.QuestionEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.GroupEntityUserEntity", b =>
+                {
+                    b.Property<Guid>("GroupsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UsersId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("GroupsId", "UsersId");
+
+                    b.HasIndex(new[] { "UsersId" }, "IX_GroupEntityUserEntity_UsersId");
+
+                    b.ToTable("GroupEntityUserEntity");
+                });
+
+            modelBuilder.Entity("STS.DAL.Entities.Question", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Body")
@@ -175,17 +133,16 @@ namespace STS.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ThemeId");
+                    b.HasIndex(new[] { "ThemeId" }, "IX_Questions_ThemeId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex(new[] { "UserId" }, "IX_Questions_UserId");
 
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.StudentAnswerEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.StudentAnswer", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<long>("AnswerDuration")
@@ -194,26 +151,39 @@ namespace STS.DAL.Migrations
                     b.Property<Guid>("AnswerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("QuestionId")
+                    b.Property<Guid?>("QuestionId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("StudentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("TestEntityId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TestEntityId");
+                    b.HasIndex("AnswerId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("StudentAnswers");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.TestEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.Subject", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subjects");
+                });
+
+            modelBuilder.Entity("STS.DAL.Entities.Test", b =>
+                {
+                    b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("CountOfHelpChecks")
@@ -245,17 +215,16 @@ namespace STS.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex(new[] { "StudentId" }, "IX_Tests_StudentId");
 
-                    b.HasIndex("ThemeId");
+                    b.HasIndex(new[] { "ThemeId" }, "IX_Tests_ThemeId");
 
                     b.ToTable("Tests");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.ThemeEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.Theme", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("CountQuestions")
@@ -269,45 +238,57 @@ namespace STS.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SubjectId");
+                    b.HasIndex(new[] { "SubjectId" }, "IX_Themes_SubjectId");
 
                     b.ToTable("Themes");
                 });
 
-            modelBuilder.Entity("GroupEntityUserEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.User", b =>
                 {
-                    b.HasOne("STS.DAL.EntityContext.Entities.GroupEntity", null)
-                        .WithMany()
-                        .HasForeignKey("GroupsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasOne("STS.DAL.EntityContext.Entitieas.UserEntity", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.AnswerEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.Answer", b =>
                 {
-                    b.HasOne("STS.DAL.EntityContext.Entities.QuestionEntity", null)
+                    b.HasOne("STS.DAL.Entities.Question", "IdQuestionNavigation")
                         .WithMany("Answers")
-                        .HasForeignKey("QuestionEntityId");
+                        .HasForeignKey("IdQuestion")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("IdQuestionNavigation");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.AvailableTestEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.AvailableTest", b =>
                 {
-                    b.HasOne("STS.DAL.EntityContext.Entitieas.UserEntity", "Student")
+                    b.HasOne("STS.DAL.Entities.User", "Student")
                         .WithMany("AvailableTests")
                         .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("STS.DAL.EntityContext.Entities.ThemeEntity", "Theme")
+                    b.HasOne("STS.DAL.Entities.Theme", "Theme")
                         .WithMany("AvailableTests")
                         .HasForeignKey("ThemeId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Student");
@@ -315,15 +296,34 @@ namespace STS.DAL.Migrations
                     b.Navigation("Theme");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.QuestionEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.GroupEntityUserEntity", b =>
                 {
-                    b.HasOne("STS.DAL.EntityContext.Entities.ThemeEntity", "Theme")
+                    b.HasOne("STS.DAL.Entities.Group", "Groups")
+                        .WithMany("GroupEntityUserEntities")
+                        .HasForeignKey("GroupsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("STS.DAL.Entities.User", "Users")
+                        .WithMany("GroupEntityUserEntities")
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Groups");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("STS.DAL.Entities.Question", b =>
+                {
+                    b.HasOne("STS.DAL.Entities.Theme", "Theme")
                         .WithMany("Questions")
                         .HasForeignKey("ThemeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("STS.DAL.EntityContext.Entitieas.UserEntity", "User")
+                    b.HasOne("STS.DAL.Entities.User", "User")
                         .WithMany("Questions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -334,21 +334,39 @@ namespace STS.DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.StudentAnswerEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.StudentAnswer", b =>
                 {
-                    b.HasOne("STS.DAL.EntityContext.Entities.TestEntity", null)
-                        .WithMany("Answers")
-                        .HasForeignKey("TestEntityId");
+                    b.HasOne("STS.DAL.Entities.Answer", "Answer")
+                        .WithMany("StudentAnswers")
+                        .HasForeignKey("AnswerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("STS.DAL.Entities.Question", "Question")
+                        .WithMany("StudentAnswers")
+                        .HasForeignKey("QuestionId");
+
+                    b.HasOne("STS.DAL.Entities.User", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Answer");
+
+                    b.Navigation("Question");
+
+                    b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.TestEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.Test", b =>
                 {
-                    b.HasOne("STS.DAL.EntityContext.Entitieas.UserEntity", "Student")
+                    b.HasOne("STS.DAL.Entities.User", "Student")
                         .WithMany("Tests")
                         .HasForeignKey("StudentId");
 
-                    b.HasOne("STS.DAL.EntityContext.Entities.ThemeEntity", "Theme")
-                        .WithMany()
+                    b.HasOne("STS.DAL.Entities.Theme", "Theme")
+                        .WithMany("Tests")
                         .HasForeignKey("ThemeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -358,9 +376,9 @@ namespace STS.DAL.Migrations
                     b.Navigation("Theme");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.ThemeEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.Theme", b =>
                 {
-                    b.HasOne("STS.DAL.EntityContext.Entitieas.SubjectEntity", "Subject")
+                    b.HasOne("STS.DAL.Entities.Subject", "Subject")
                         .WithMany("Themes")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -369,12 +387,29 @@ namespace STS.DAL.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entitieas.SubjectEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.Answer", b =>
+                {
+                    b.Navigation("StudentAnswers");
+                });
+
+            modelBuilder.Entity("STS.DAL.Entities.Group", b =>
+                {
+                    b.Navigation("GroupEntityUserEntities");
+                });
+
+            modelBuilder.Entity("STS.DAL.Entities.Question", b =>
+                {
+                    b.Navigation("Answers");
+
+                    b.Navigation("StudentAnswers");
+                });
+
+            modelBuilder.Entity("STS.DAL.Entities.Subject", b =>
                 {
                     b.Navigation("Themes");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entitieas.UserEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.Theme", b =>
                 {
                     b.Navigation("AvailableTests");
 
@@ -383,21 +418,15 @@ namespace STS.DAL.Migrations
                     b.Navigation("Tests");
                 });
 
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.QuestionEntity", b =>
-                {
-                    b.Navigation("Answers");
-                });
-
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.TestEntity", b =>
-                {
-                    b.Navigation("Answers");
-                });
-
-            modelBuilder.Entity("STS.DAL.EntityContext.Entities.ThemeEntity", b =>
+            modelBuilder.Entity("STS.DAL.Entities.User", b =>
                 {
                     b.Navigation("AvailableTests");
 
+                    b.Navigation("GroupEntityUserEntities");
+
                     b.Navigation("Questions");
+
+                    b.Navigation("Tests");
                 });
 #pragma warning restore 612, 618
         }

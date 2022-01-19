@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace STS.Common.Auth.Models
+﻿namespace STS.Common.Auth.Models
 {
     public class AuthModel
     {

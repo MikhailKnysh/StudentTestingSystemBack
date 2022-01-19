@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using STS.Common.Models;
-using STS.DAL.EntityContext.Entities;
+using STS.DAL.Entities;
 
 namespace STS.DAL.Mapper.Profiles
 {
@@ -18,7 +18,7 @@ namespace STS.DAL.Mapper.Profiles
                 .ForMember(dest => dest.StudentId, opt => opt
                     .MapFrom(src => src.StudentId))
                 .ForMember(dest => dest.Theme, opt => opt
-                    .MapFrom(src => src.Theme));
+                    .MapFrom(src => src.ThemeEntity));
         }
 
         private void CreateMapAvailableTestEntityToAvailableTest()
