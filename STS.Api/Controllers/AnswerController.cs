@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using STS.Common.Constans;
 using STS.Common.Models;
 using STS.Common.RootControllers;
 using STS.DAL.DataAccess.Answers.Services;
 
 namespace STS.Api.Controllers
 {
+    [Authorize(Policy = RoleConstants.PolicyConstants.CommonPolicy)]
     public class AnswerController : RootController
     {
         private readonly IAnswerService _answerService;

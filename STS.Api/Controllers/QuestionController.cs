@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
+using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using STS.Common.Constans;
 using STS.Common.Models;
 using STS.Common.RootControllers;
 using STS.DAL.DataAccess.Questions.Services;
 
 namespace STS.Api.Controllers
 {
+    [Authorize(Policy = RoleConstants.PolicyConstants.CommonPolicy)]
     public class QuestionController : RootController
     {
         private readonly IQuestionService _questionService;
@@ -88,6 +92,14 @@ namespace STS.Api.Controllers
         public async Task<IActionResult> GetNextQuestion(Question question)
         {
             var result = _questionService.GetNextQuestionAsync(question);
+
+            return ToApiResult(result);
+        }
+
+        [HttpPost("init/test")]
+        public async Task<IActionResult> InitTestAsync(AvailableTest availableTest)
+        {
+            var result = await _questionService.IntiTestAsync(availableTest);
 
             return ToApiResult(result);
         }

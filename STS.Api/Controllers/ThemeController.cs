@@ -5,9 +5,12 @@ using STS.Common.RootControllers;
 using STS.DAL.DataAccess.Themes.Services;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using STS.Common.Constans;
 
 namespace STS.Api.Controllers
 {
+    [Authorize(Policy = RoleConstants.PolicyConstants.CommonPolicy)]
     public class ThemeController : RootController
     {
         private readonly IThemeService _themeService;

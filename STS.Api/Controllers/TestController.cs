@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using STS.Common.Constans;
 using STS.Common.Models;
 using STS.Common.RootControllers;
 using STS.DAL.DataAccess.Tests.Services;
 
 namespace STS.Api.Controllers
 {
+    [Authorize(Policy = RoleConstants.PolicyConstants.CommonPolicy)]
     public class TestController : RootController
     {
         private readonly ITestService _testService;
@@ -20,7 +23,7 @@ namespace STS.Api.Controllers
         {
             _testService = testService;
         }
-
+        
         [HttpPost("set/availableTest")]
         public async Task<IActionResult> SetAvailableTestAsync(AvailableTestForStudents availableTestForStudents)
         {

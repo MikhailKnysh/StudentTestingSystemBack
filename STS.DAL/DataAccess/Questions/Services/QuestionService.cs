@@ -7,6 +7,7 @@ using FluentResults;
 using STS.Common.Constans;
 using STS.Common.FluentResult.Extensions;
 using STS.Common.Models;
+using STS.DAL.DataAccess.AvailableTests.Sevices;
 using STS.DAL.DataAccess.Questions.Repositories;
 using STS.DAL.EntityContext.Entities;
 
@@ -15,14 +16,17 @@ namespace STS.DAL.DataAccess.Questions.Services
     public class QuestionService : IQuestionService
     {
         private readonly IQuestionRepository _questionRepository;
+        private readonly IAvailableTestService _availableTestService;
         private readonly IMapper _mapper;
 
         public QuestionService(
             IQuestionRepository questionRepository,
+            IAvailableTestService availableTestService,
             IMapper mapper
         )
         {
             _questionRepository = questionRepository;
+            _availableTestService = availableTestService;
             _mapper = mapper;
         }
 
@@ -126,6 +130,22 @@ namespace STS.DAL.DataAccess.Questions.Services
             var questionModel = _mapper.Map<Question>(foundedEntity);
 
             return questionModel.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
+        }
+
+        public async Task<Result<Question>> IntiTestAsync(AvailableTest availableTest)
+        {
+            var availableTestInDb = await _availableTestService.GetByStudentId(availableTest.StudentId);
+            Question question = null;
+            if (availableTestInDb.IsSuccess && availableTestInDb.Value.Any(x => x.StudentId == availableTest.StudentId && x.Theme?.Id == availableTest.Theme?.Id))
+            {
+                var questionResult = await GetNextQuestionAsync(new Question());
+                if (questionResult.IsSuccess)
+                {
+                    question = questionResult.Value;
+                }
+            }
+
+            return question.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
         }
     }
 }
