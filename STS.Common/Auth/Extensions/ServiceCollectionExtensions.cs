@@ -55,7 +55,7 @@ namespace STS.Common.Auth.Extensions
                 options.AddPolicy(RoleConstants.PolicyConstants.AdminAndTeacherPolicy,
                     policy => policy.RequireRole(RoleConstants.Teacher, RoleConstants.Admin));
                 options.AddPolicy(RoleConstants.PolicyConstants.CommonPolicy,
-                    policy => policy.RequireRole(RoleConstants.Teacher, RoleConstants.Admin, RoleConstants.Admin));
+                    policy => policy.RequireRole(RoleConstants.Teacher, RoleConstants.Admin, RoleConstants.Student));
             });
         }
     }

@@ -20,7 +20,6 @@ namespace STS.DAL.DataAccess.Questions.Repositories
             var questions = await _context.Questions
                 .Include(e=>e.Answers)
                 .Include(e=>e.Theme)
-                .Include(e=>e.User)
                 .ToListAsync();
 
             return questions;
@@ -28,10 +27,10 @@ namespace STS.DAL.DataAccess.Questions.Repositories
 
         public async Task<List<QuestionEntity>> GetAllQuestionsByThemeIdAsync(Guid themeId)
         {
+            var a = await _context.Questions.ToListAsync();
             var questions = await _context.Questions
                 .Include(e=>e.Answers)
                 .Include(e=>e.Theme)
-                .Include(e=>e.User)
                 .Where(e=>e.ThemeId==themeId)
                 .ToListAsync();
 
@@ -43,7 +42,6 @@ namespace STS.DAL.DataAccess.Questions.Repositories
             var question = await _context.Questions
                 .Include(e=>e.Answers)
                 .Include(e=>e.Theme)
-                .Include(e=>e.User)
                 .Where(e=>e.Id==id)
                 .FirstOrDefaultAsync();
 
@@ -55,7 +53,6 @@ namespace STS.DAL.DataAccess.Questions.Repositories
             var questions = await _context.Questions
                 .Include(e=>e.Answers)
                 .Include(e=>e.Theme)
-                .Include(e=>e.User)
                 .Where(q => q.ThemeId == themeId && q.Difficulty == difficulty)
                 .ToListAsync();
 
@@ -71,7 +68,9 @@ namespace STS.DAL.DataAccess.Questions.Repositories
 
         public async Task<QuestionEntity> GetNextQuestionAsync(int toSkip)
         {
-            var question = await _context.Questions.Skip(toSkip).Take(1).FirstOrDefaultAsync();
+            var question = await _context.Questions
+                .Include(e=>e.Answers)
+                .Skip(toSkip).Take(1).FirstOrDefaultAsync();
 
             return question;
         }

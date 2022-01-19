@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentResults;
@@ -24,7 +25,7 @@ namespace STS.DAL.DataAccess.StudentAnswers.Services
             _mapper = mapper;
         }
 
-        public async Task<Result> CreateAsync(StudentAnswer studentAnswer)
+        public async Task<Result> CreateAsync(StudentAnswerLight studentAnswer)
         {
             var entity = _mapper.Map<StudentAnswerEntity>(studentAnswer);
             var responseDb = await _studentAnswerRepository.CreateAsync(entity);
@@ -34,7 +35,15 @@ namespace STS.DAL.DataAccess.StudentAnswers.Services
 
         public async Task<Result<StudentAnswerEntity>> GetStudentAnswerByQuestionIdAsync(Guid questionId)
         {
-            var result = await _studentAnswerRepository.FindAsync(e => e.QuestionsId == questionId);
+            var result = await _studentAnswerRepository.FindAsync(e => e.QuestionId == questionId);
+
+            return result.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
+        }
+
+        
+        public async Task<Result<List<StudentAnswerEntity>>> GetAllByStudentIdAsync(Guid studentId)
+        {
+            var result = await _studentAnswerRepository.WhereAsync(e => e.StudentId == studentId);
 
             return result.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
         }

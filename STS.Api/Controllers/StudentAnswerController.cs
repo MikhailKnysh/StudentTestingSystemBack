@@ -24,7 +24,7 @@ namespace STS.Api.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateStudentAnswerAsync(StudentAnswer studentAnswer)
+        public async Task<IActionResult> CreateStudentAnswerAsync(StudentAnswerLight studentAnswer)
         {
             var result = await _studentAnswerService.CreateAsync(studentAnswer);
 

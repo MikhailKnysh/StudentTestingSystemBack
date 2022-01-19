@@ -9,6 +9,8 @@ using STS.Common.FluentResult.Extensions;
 using STS.Common.Models;
 using STS.DAL.DataAccess.AvailableTests.Sevices;
 using STS.DAL.DataAccess.Questions.Repositories;
+using STS.DAL.DataAccess.StudentAnswers.Repositories;
+using STS.DAL.DataAccess.StudentAnswers.Services;
 using STS.DAL.EntityContext.Entities;
 
 namespace STS.DAL.DataAccess.Questions.Services
@@ -17,16 +19,19 @@ namespace STS.DAL.DataAccess.Questions.Services
     {
         private readonly IQuestionRepository _questionRepository;
         private readonly IAvailableTestService _availableTestService;
+        private readonly IStudentAnswerService _studentAnswerService;
         private readonly IMapper _mapper;
 
         public QuestionService(
             IQuestionRepository questionRepository,
             IAvailableTestService availableTestService,
+            IStudentAnswerService studentAnswerService,
             IMapper mapper
         )
         {
             _questionRepository = questionRepository;
             _availableTestService = availableTestService;
+            _studentAnswerService = studentAnswerService;
             _mapper = mapper;
         }
 
@@ -119,17 +124,35 @@ namespace STS.DAL.DataAccess.Questions.Services
             return responseDb.CheckDbResponse(ErrorConstants.QuestionError.QuestionNotUpdated);
         }
 
-        public async Task<Result<Question>> GetNextQuestionAsync(Question question)
+        public async Task<Result<Question>> GetNextQuestionAsync(Guid studentId, Guid themeId)
         {
-            Random random = new Random();
-            int quantity = await _questionRepository.GetQuestionsQuantityAsync();
+            // Random random = new Random();
+            // int quantity = await _questionRepository.GetQuestionsQuantityAsync();
+            //
+            // int toSkip = random.Next(1, quantity);
+            //
+            // var foundedEntity = await _questionRepository.GetNextQuestionAsync(toSkip);
+            // var questionModel = _mapper.Map<Question>(foundedEntity);
+            //
+            // return questionModel.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
 
-            int toSkip = random.Next(1, quantity);
+            var questions = await _questionRepository.GetAllQuestionsByThemeIdAsync(themeId);
+            var studentAnswerResult = await _studentAnswerService.GetAllByStudentIdAsync(studentId);
+            if (studentAnswerResult.IsSuccess)
+            {
+                var questionsIdsWithAnswers = studentAnswerResult.Value.Select(x => x.QuestionId);
+                var question = questions.FirstOrDefault(x => !questionsIdsWithAnswers.Contains(x.Id));
+                var questionModel = _mapper.Map<Question>(question);
 
-            var foundedEntity = await _questionRepository.GetNextQuestionAsync(toSkip);
-            var questionModel = _mapper.Map<Question>(foundedEntity);
+                return questionModel.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
+            }
+            else
+            {
+                var question = questions.FirstOrDefault();
+                var questionModel = _mapper.Map<Question>(question);
 
-            return questionModel.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
+                return questionModel.CheckEntityNull(ErrorConstants.CommonErrors.DataNotFound);
+            }
         }
 
         public async Task<Result<Question>> IntiTestAsync(AvailableTest availableTest)
@@ -138,7 +161,7 @@ namespace STS.DAL.DataAccess.Questions.Services
             Question question = null;
             if (availableTestInDb.IsSuccess && availableTestInDb.Value.Any(x => x.StudentId == availableTest.StudentId && x.Theme?.Id == availableTest.Theme?.Id))
             {
-                var questionResult = await GetNextQuestionAsync(new Question());
+                var questionResult = await GetNextQuestionAsync(availableTest.StudentId,availableTest.Theme.Id);
                 if (questionResult.IsSuccess)
                 {
                     question = questionResult.Value;

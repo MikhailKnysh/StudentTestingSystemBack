@@ -8,6 +8,5 @@ namespace STS.DAL.EntityContext.Entities
         public Guid Id_Question { get; set; }
         public string Body { get; set; }
         public bool IsCorrect { get; set; }
-        public QuestionEntity Question { get; set; }
     }
 }
