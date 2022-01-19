@@ -9,114 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59a3cc28-a707-4b65-bc95-337004c8e535" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.StudentTestingSystemBack/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.StudentTestingSystemBack/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.StudentTestingSystemBack/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.StudentTestingSystemBack/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.Api/Controllers/QuestionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/STS.Api/Controllers/QuestionController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.Api/Controllers/SubjectController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/STS.Api/Controllers/SubjectController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.Api/Controllers/TestController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/STS.Api/Controllers/TestController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.Api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/STS.Api/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.Common/ApiErrors/ApiError.cs" beforeDir="false" afterPath="$PROJECT_DIR$/STS.Common/ApiErrors/ApiError.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.Common/Auth/Extensions/ServiceCollectionExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/STS.Common/Auth/Extensions/ServiceCollectionExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.Common/Auth/Models/AuthModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/STS.Common/Auth/Models/AuthModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.Common/Auth/Models/AuthModelForCreateToken.cs" beforeDir="false" afterPath="$PROJECT_DIR$/STS.Common/Auth/Models/AuthModelForCreateToken.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.Common/Constans/ErrorConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/STS.Common/Constans/ErrorConstants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.Common/Models/Theme.cs" beforeDir="false" afterPath="$PROJECT_DIR$/STS.Common/Models/Theme.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.Common/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/STS.Common/Models/User.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Answers/Extensions/ServiceCollectionExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Answers/Repositories/AnswerRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Answers/Repositories/IAnswerRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Answers/Services/AnswerService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Answers/Services/IAnswerService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/AvailableTests/Extensions/ServiceCollectionExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/AvailableTests/Repositories/AvailableTestRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/AvailableTests/Repositories/IAvailableTestRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/AvailableTests/Sevices/AvailableTestService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/AvailableTests/Sevices/IAvailableTestService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/BaseRepository/BaseRepositoryAbstract.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/BaseRepository/IBaseRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Extensions/ServiceCollectionExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Groups/Extensions/ServiceCollectionExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Groups/Repositories/GroupRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Groups/Repositories/IGroupRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Groups/Services/GroupService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Groups/Services/IGroupService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Questions/Extensions/ServiceCollectionExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Questions/Repositories/IQuestionRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Questions/Repositories/QuestionRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Questions/Services/IQuestionService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Questions/Services/QuestionService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Sessions/Extensions/ServiceCollectionExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Sessions/Services/ISessionService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Sessions/Services/SessionService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/StudentAnswers/Extensions/ServiceCollectionExtension.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/StudentAnswers/Repositories/IStudentAnswerRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/StudentAnswers/Repositories/StudentAnswerRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/StudentAnswers/Services/IStudentAnswerService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/StudentAnswers/Services/StudentAnswerService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Subjects/Extensions/ServiceCollectionExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Subjects/Repositories/ISubjectRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Subjects/Repositories/SubjectRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Subjects/Services/ISubjectService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Subjects/Services/SubjectService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Tests/Extensions/ServiceCollectionExtension.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Tests/Repositories/ITestRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Tests/Repositories/TestRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Tests/Services/ITestService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Tests/Services/TestService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Themes/Extension/ServiceCollectionExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Themes/Repositories/IThemeRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Themes/Repositories/ThemeRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Themes/Services/IThemeService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Themes/Services/ThemeService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Users/Extensions/ServiceCollectionExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Users/Repositories/IUserRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Users/Repositories/UserRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Users/Services/IUserService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Users/Services/UserService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/EntityContext/Context/ApplicationContext.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/EntityContext/Entities/AnswerEntity.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/EntityContext/Entities/AvailableTestEntity.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/EntityContext/Entities/GroupEntity.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/EntityContext/Entities/QuestionEntity.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/EntityContext/Entities/StudentAnswerEntity.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/EntityContext/Entities/SubjectEntity.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/EntityContext/Entities/TestEntity.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/EntityContext/Entities/ThemeEntity.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/EntityContext/Entities/UserEntity.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/EntityContext/Extensions/MigrationSqlExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/EntityContext/Extensions/ServiceCollectionExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Mapper/Extensions/ServiceCollectionExtensions.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Mapper/Profiles/AnswerMapperProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Mapper/Profiles/AvailableTestProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Mapper/Profiles/GroupMapperProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Mapper/Profiles/QuestionMapperProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Mapper/Profiles/StudentAnswerProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Mapper/Profiles/SubjectMapperProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Mapper/Profiles/ThemeMapperProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Mapper/Profiles/UserMapperProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211121204745_CreateSubject.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211121204745_CreateSubject.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211124204155_AddTheme.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211124204155_AddTheme.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211124211141_CreateUsersTable.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211124211141_CreateUsersTable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211124211603_SetDefaultUser.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211124211603_SetDefaultUser.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211124211603_SetDefaultUserScript.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211206210227_CreateGroupsTable.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211206210227_CreateGroupsTable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211218104004_AddQuestionsTable.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211218104004_AddQuestionsTable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211229201407_AddNewEntities.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20211229201407_AddNewEntities.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20220112091947_AddCountQuestionsCollumnInThemeTable.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20220112091947_AddCountQuestionsCollumnInThemeTable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20220117205248_AddAvailableTest.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/20220117205248_AddAvailableTest.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/Migrations/ApplicationContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/STS.DAL/STS.DAL.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/STS.DAL/STS.DAL.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.StudentTestingSystemBack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StudentTestingSystemBack/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STS.DAL/DataAccess/Subjects/Services/SubjectService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/STS.DAL/DataAccess/Subjects/Services/SubjectService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STS.DAL/Mapper/Profiles/ThemeMapperProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/STS.DAL/Mapper/Profiles/ThemeMapperProfile.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +71,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.STS.Api">
+  <component name="RunManager" selected="Publish to folder.Publish STS.Api Staging">
     <configuration name="Publish STS.Api to Azure" type="AzureDotNetWebAppPublish" factoryName="Azure Web App">
       <option name="AZURE_WEB_APP_PROJECT" value="$PROJECT_DIR$/STS.Api/STS.Api.csproj" />
       <option name="AZURE_WEB_APP_SUBSCRIPTION_ID" value="" />
@@ -322,7 +217,7 @@
       <workItem from="1642278467314" duration="19358000" />
       <workItem from="1642448028224" duration="6796000" />
       <workItem from="1642612384560" duration="3493000" />
-      <workItem from="1642615965762" duration="4794000" />
+      <workItem from="1642615965762" duration="6515000" />
     </task>
     <servers />
   </component>

@@ -28,7 +28,7 @@ namespace STS.DAL.DataAccess.Subjects.Services
         public async Task<Result> CreateAsync(Subject subject)
         {
             var subjectEntity = _mapper.Map<SubjectEntity>(subject);
-            subjectEntity.Id = new Guid();
+            subjectEntity.Id = Guid.NewGuid();
 
             var responseDb = await _subjectRepository.CreateAsync(subjectEntity);
 

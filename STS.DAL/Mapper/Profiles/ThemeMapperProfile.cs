@@ -20,7 +20,7 @@ namespace STS.DAL.Mapper.Profiles
                 .ForMember(dest => dest.Title, opt => opt
                     .MapFrom(src => src.Title))
                 .ForMember(dest => dest.SubjectId, opt => opt
-                    .MapFrom(src => src.SubjectEntity.Id))
+                    .MapFrom(src => src.SubjectId))
                 .ForMember(dest => dest.CountQuestions, opt => opt
                     .MapFrom(src => src.CountQuestions));
         }
